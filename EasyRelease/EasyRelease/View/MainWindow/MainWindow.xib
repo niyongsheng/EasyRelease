@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="17701" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="17701"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <customObject id="-2" userLabel="File's Owner" customClass="MainWindowController">
+            <connections>
+                <outlet property="window" destination="QvC-M9-y7g" id="tUm-OD-ViS"/>
+            </connections>
+        </customObject>
+        <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
+        <customObject id="-3" userLabel="Application" customClass="NSObject"/>
+        <window title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" restorable="NO" hasShadow="NO" releasedWhenClosed="NO" animationBehavior="default" id="QvC-M9-y7g" customClass="MainWindow">
+            <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
+            <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
+            <rect key="contentRect" x="196" y="240" width="1020" height="701"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1055"/>
+            <view key="contentView" id="EiT-Mj-1SZ" customClass="MainWindowView">
+                <rect key="frame" x="0.0" y="0.0" width="1020" height="701"/>
+                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                <subviews>
+                    <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="DIN-pD-Qrh" customClass="NYSTitleBarView">
+                        <rect key="frame" x="0.0" y="641" width="1020" height="60"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    </customView>
+                    <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="v2n-7g-Mdb" customClass="NYSNavigateView">
+                        <rect key="frame" x="0.0" y="0.0" width="170" height="641"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    </customView>
+                    <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="RiF-IL-e4v" customClass="NYSContentView">
+                        <rect key="frame" x="170" y="1" width="850" height="640"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    </customView>
+                </subviews>
+            </view>
+            <point key="canvasLocation" x="321" y="404"/>
+        </window>
+        <viewController id="QgU-lW-5CT" customClass="NYSTitleBarVC">
+            <connections>
+                <outlet property="view" destination="DIN-pD-Qrh" id="RcZ-b1-ckO"/>
+            </connections>
+        </viewController>
+        <viewController id="vyH-Ip-Fgi" customClass="NYSNavigateVC">
+            <connections>
+                <outlet property="view" destination="v2n-7g-Mdb" id="pZw-y9-Tdw"/>
+            </connections>
+        </viewController>
+        <viewController id="sp8-Yw-atn" customClass="NYSContentVC">
+            <connections>
+                <outlet property="view" destination="RiF-IL-e4v" id="gru-LZ-CMm"/>
+            </connections>
+        </viewController>
+    </objects>
+</document>

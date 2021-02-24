@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="17701" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="17701"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <customObject id="-2" userLabel="File's Owner" customClass="NYSActionVC">
+            <connections>
+                <outlet property="actionBtn" destination="v8v-w8-3A8" id="hP1-hb-OWk"/>
+                <outlet property="actionInfoTextView" destination="2Er-dA-223" id="MPN-Zs-jCj"/>
+                <outlet property="downloadPathControl" destination="vur-k7-Pdf" id="AfC-Ga-abX"/>
+                <outlet property="uploadPathControl" destination="e1Q-jo-Iev" id="sKT-Rj-zkA"/>
+                <outlet property="view" destination="Hz6-mo-xeY" id="0bl-1N-x8E"/>
+            </connections>
+        </customObject>
+        <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
+        <customObject id="-3" userLabel="Application" customClass="NSObject"/>
+        <customView id="Hz6-mo-xeY">
+            <rect key="frame" x="0.0" y="0.0" width="773" height="654"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+            <subviews>
+                <box boxType="custom" cornerRadius="4" title="Box" translatesAutoresizingMaskIntoConstraints="NO" id="sbE-0s-sXD">
+                    <rect key="frame" x="50" y="190" width="673" height="424"/>
+                    <view key="contentView" id="wEG-Rz-OlL">
+                        <rect key="frame" x="1" y="1" width="671" height="422"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView borderType="none" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gKd-21-rEJ">
+                                <rect key="frame" x="0.0" y="0.0" width="671" height="422"/>
+                                <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="Dec-LU-6KI">
+                                    <rect key="frame" x="0.0" y="0.0" width="656" height="422"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <subviews>
+                                        <textView editable="NO" importsGraphics="NO" verticallyResizable="YES" baseWritingDirection="leftToRight" fieldEditor="YES" usesFontPanel="YES" findStyle="panel" continuousSpellChecking="YES" allowsUndo="YES" usesRuler="YES" allowsNonContiguousLayout="YES" spellingCorrection="YES" smartInsertDelete="YES" id="2Er-dA-223">
+                                            <rect key="frame" x="0.0" y="0.0" width="656" height="422"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                            <color key="textColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <color key="backgroundColor" white="1" alpha="0.0" colorSpace="calibratedWhite"/>
+                                            <size key="minSize" width="656" height="422"/>
+                                            <size key="maxSize" width="671" height="10000000"/>
+                                            <color key="insertionPointColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                        </textView>
+                                    </subviews>
+                                    <color key="backgroundColor" white="1" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </clipView>
+                                <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="YES" id="ndM-vT-4bV">
+                                    <rect key="frame" x="-100" y="-100" width="87" height="18"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </scroller>
+                                <scroller key="verticalScroller" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="sKV-rb-IE7">
+                                    <rect key="frame" x="656" y="0.0" width="15" height="422"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </scroller>
+                            </scrollView>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="gKd-21-rEJ" firstAttribute="leading" secondItem="wEG-Rz-OlL" secondAttribute="leading" id="4k1-3C-34e"/>
+                            <constraint firstAttribute="bottom" secondItem="gKd-21-rEJ" secondAttribute="bottom" id="9HD-y0-eJC"/>
+                            <constraint firstItem="gKd-21-rEJ" firstAttribute="top" secondItem="wEG-Rz-OlL" secondAttribute="top" id="Yx4-yV-BEe"/>
+                            <constraint firstAttribute="trailing" secondItem="gKd-21-rEJ" secondAttribute="trailing" id="y19-BE-II1"/>
+                        </constraints>
+                    </view>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="673" id="GzW-Mj-qsq"/>
+                    </constraints>
+                    <color key="fillColor" red="0.21874836089999999" green="0.2423581481" blue="0.28806790710000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                </box>
+                <customView translatesAutoresizingMaskIntoConstraints="NO" id="yI4-fT-gZ7">
+                    <rect key="frame" x="20" y="20" width="733" height="150"/>
+                    <subviews>
+                        <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="v8v-w8-3A8">
+                            <rect key="frame" x="573" y="39" width="70" height="32"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="30" id="d1d-RW-Vq3"/>
+                                <constraint firstAttribute="width" constant="70" id="jWm-2N-jvl"/>
+                            </constraints>
+                            <buttonCell key="cell" type="smallSquare" title="Action" bezelStyle="smallSquare" alignment="center" borderStyle="border" inset="2" id="CB1-Yy-LAQ">
+                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                <font key="font" metaFont="system"/>
+                            </buttonCell>
+                            <connections>
+                                <action selector="action:" target="-2" id="LGA-Zd-e0x"/>
+                            </connections>
+                        </button>
+                        <button horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Yi5-Zk-W3s">
+                            <rect key="frame" x="660" y="41" width="25" height="25"/>
+                            <constraints>
+                                <constraint firstAttribute="width" secondItem="Yi5-Zk-W3s" secondAttribute="height" multiplier="1:1" id="cI0-VA-ZNp"/>
+                                <constraint firstAttribute="width" constant="20" id="ceg-5b-BEQ"/>
+                            </constraints>
+                            <buttonCell key="cell" type="help" alternateTitle="数据无价，请先备份！" bezelStyle="helpButton" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="QTE-op-dWT">
+                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                <font key="font" metaFont="system"/>
+                            </buttonCell>
+                            <connections>
+                                <action selector="tip:" target="-2" id="YDH-af-I1P"/>
+                            </connections>
+                        </button>
+                        <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="isX-hf-mAi">
+                            <rect key="frame" x="23" y="76" width="49" height="36"/>
+                            <constraints>
+                                <constraint firstAttribute="width" secondItem="isX-hf-mAi" secondAttribute="height" multiplier="3:2" id="FHg-GP-07O"/>
+                                <constraint firstAttribute="width" constant="35" id="JVO-eg-wmG"/>
+                            </constraints>
+                            <buttonCell key="cell" type="push" bezelStyle="rounded" image="icloud.and.arrow.up" catalog="system" imagePosition="overlaps" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="FqL-ch-yMG">
+                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                <font key="font" metaFont="system"/>
+                            </buttonCell>
+                            <connections>
+                                <action selector="uploadJsonFile:" target="-2" id="OgO-aq-6Nx"/>
+                            </connections>
+                        </button>
+                        <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="wc8-na-bCV">
+                            <rect key="frame" x="23" y="36" width="49" height="36"/>
+                            <buttonCell key="cell" type="push" bezelStyle="rounded" image="icloud.and.arrow.down" catalog="system" imagePosition="only" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="I8D-vS-n5u">
+                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                <font key="font" metaFont="system"/>
+                            </buttonCell>
+                            <connections>
+                                <action selector="downloadJsonFile:" target="-2" id="1Vx-kW-aqb"/>
+                            </connections>
+                        </button>
+                        <pathControl verticalHuggingPriority="750" allowsExpansionToolTips="YES" translatesAutoresizingMaskIntoConstraints="NO" id="e1Q-jo-Iev">
+                            <rect key="frame" x="85" y="84" width="448" height="22"/>
+                            <pathCell key="cell" selectable="YES" editable="YES" alignment="left" id="5CW-LW-8Jp">
+                                <font key="font" metaFont="system"/>
+                                <url key="url" string="file:///"/>
+                            </pathCell>
+                        </pathControl>
+                        <pathControl verticalHuggingPriority="750" allowsExpansionToolTips="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vur-k7-Pdf">
+                            <rect key="frame" x="85" y="44" width="448" height="22"/>
+                            <pathCell key="cell" selectable="YES" editable="YES" alignment="left" id="9ne-OT-7rs">
+                                <font key="font" metaFont="system"/>
+                                <url key="url" string="file:///"/>
+                            </pathCell>
+                        </pathControl>
+                    </subviews>
+                    <constraints>
+                        <constraint firstItem="Yi5-Zk-W3s" firstAttribute="leading" secondItem="v8v-w8-3A8" secondAttribute="trailing" constant="20" id="3O9-p6-Yll"/>
+                        <constraint firstAttribute="trailing" secondItem="Yi5-Zk-W3s" secondAttribute="trailing" constant="50" id="3h9-Vr-eXa"/>
+                        <constraint firstItem="wc8-na-bCV" firstAttribute="width" secondItem="isX-hf-mAi" secondAttribute="width" id="Ejs-bV-66e"/>
+                        <constraint firstItem="v8v-w8-3A8" firstAttribute="centerY" secondItem="yI4-fT-gZ7" secondAttribute="centerY" constant="20" id="Hor-pG-euT"/>
+                        <constraint firstItem="wc8-na-bCV" firstAttribute="centerY" secondItem="yI4-fT-gZ7" secondAttribute="centerY" constant="20" id="JJl-ig-x9o"/>
+                        <constraint firstItem="vur-k7-Pdf" firstAttribute="centerY" secondItem="yI4-fT-gZ7" secondAttribute="centerY" constant="20" id="T06-7a-T5u"/>
+                        <constraint firstItem="vur-k7-Pdf" firstAttribute="width" secondItem="e1Q-jo-Iev" secondAttribute="width" id="V62-Iz-Tmp"/>
+                        <constraint firstItem="isX-hf-mAi" firstAttribute="centerY" secondItem="yI4-fT-gZ7" secondAttribute="centerY" constant="-20" id="cJj-ww-Ydi"/>
+                        <constraint firstItem="v8v-w8-3A8" firstAttribute="leading" secondItem="vur-k7-Pdf" secondAttribute="trailing" constant="40" id="csq-gb-OWc"/>
+                        <constraint firstItem="isX-hf-mAi" firstAttribute="leading" secondItem="yI4-fT-gZ7" secondAttribute="leading" constant="30" id="dL2-pb-dMM"/>
+                        <constraint firstItem="wc8-na-bCV" firstAttribute="leading" secondItem="isX-hf-mAi" secondAttribute="leading" id="f4p-hY-IJ1"/>
+                        <constraint firstItem="wc8-na-bCV" firstAttribute="height" secondItem="isX-hf-mAi" secondAttribute="height" id="h96-Ee-cP4"/>
+                        <constraint firstItem="vur-k7-Pdf" firstAttribute="leading" secondItem="wc8-na-bCV" secondAttribute="trailing" constant="20" id="kLx-iD-xzG"/>
+                        <constraint firstAttribute="height" constant="150" id="nLh-Dg-zNn"/>
+                        <constraint firstItem="vur-k7-Pdf" firstAttribute="leading" secondItem="e1Q-jo-Iev" secondAttribute="leading" id="nUj-yb-dAG"/>
+                        <constraint firstItem="e1Q-jo-Iev" firstAttribute="centerY" secondItem="yI4-fT-gZ7" secondAttribute="centerY" constant="-20" id="r3t-Lg-8od"/>
+                        <constraint firstItem="Yi5-Zk-W3s" firstAttribute="centerY" secondItem="yI4-fT-gZ7" secondAttribute="centerY" constant="20" id="z4s-Kz-EuH"/>
+                    </constraints>
+                </customView>
+            </subviews>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="yI4-fT-gZ7" secondAttribute="trailing" constant="20" id="1iO-xq-JF3"/>
+                <constraint firstItem="sbE-0s-sXD" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="40" id="2Y7-To-pLl"/>
+                <constraint firstItem="yI4-fT-gZ7" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="20" id="9wF-5e-fJ3"/>
+                <constraint firstItem="sbE-0s-sXD" firstAttribute="centerX" secondItem="Hz6-mo-xeY" secondAttribute="centerX" id="BbS-rL-Qpy"/>
+                <constraint firstItem="sbE-0s-sXD" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="50" id="JEh-97-qhc"/>
+                <constraint firstAttribute="trailing" secondItem="sbE-0s-sXD" secondAttribute="trailing" constant="50" id="eeq-Az-rab"/>
+                <constraint firstAttribute="bottom" secondItem="yI4-fT-gZ7" secondAttribute="bottom" constant="20" id="yNS-cS-rQg"/>
+                <constraint firstItem="yI4-fT-gZ7" firstAttribute="top" secondItem="sbE-0s-sXD" secondAttribute="bottom" constant="20" id="z1Q-ig-zf6"/>
+            </constraints>
+            <point key="canvasLocation" x="359.5" y="326"/>
+        </customView>
+    </objects>
+    <resources>
+        <image name="icloud.and.arrow.down" catalog="system" width="18" height="17"/>
+        <image name="icloud.and.arrow.up" catalog="system" width="18" height="16"/>
+    </resources>
+</document>

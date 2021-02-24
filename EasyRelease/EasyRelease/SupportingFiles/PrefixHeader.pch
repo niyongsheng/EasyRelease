@@ -1,0 +1,52 @@
+//
+//  PrefixHeader.pch
+//  EasyRelease
+//
+//  Created by 倪永胜 on 2021/2/5.
+//
+
+#ifndef PrefixHeader_pch
+#define PrefixHeader_pch
+
+// Include any system framework and library headers here that should be included in all compilation units.
+// You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
+
+#define Theme_blue  1
+#define Theme_red   0
+#define Theme_green 0
+
+#if Theme_red
+/** 红色主题*/
+#define ThemeColor 0xEF4D4D
+#define TitleBarBorderColor 0xFF89B0
+#define SelectBackgroundColor 0xF4F6F9
+#define MainFontColor 0x6d757a
+#define ItemHeight 60
+#elif Theme_blue
+/** 蓝色主题*/
+#define ThemeColor 0x4885FC
+#define TitleBarBorderColor 0xD6D8DC
+#define SelectBackgroundColor 0xF4F6F9
+#define MainFontColor 0x6d757a
+#define ItemHeight 60
+#elif Theme_green
+/** 绿色主题*/
+#define ThemeColor 0x28C840
+#define TitleBarBorderColor 0xD6D8DC
+#define SelectBackgroundColor 0xF4F6F9
+#define MainFontColor 0x6d757a
+#define ItemHeight 60
+#endif
+
+#import "EasyRelease-Bridging-Header.h"
+#import "EasyRelease-Swift.h"
+#import "NYSUtils.h"
+#import "ArtProgressHUD.h"
+#import "NYSConfigManager.h"
+#import "NSColor+RGBValue.h"
+
+#define ChangeNavNotice @"NYSChangeNavigationNotification"
+#define RefreshConfNotice @"NYSRefreshConfigNotification"
+#define ActionInfoNotice @"NYSActionInfoNotification"
+
+#endif /* PrefixHeader_pch */
