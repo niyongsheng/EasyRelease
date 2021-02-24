@@ -10,10 +10,11 @@ LuckyDraw
 > Easy release to app store.
 
 ## Features
-- [Rename Project]()
-- [Delete Annotation]()
-- [Rehash Images]()
-- [Replace Class/Method]()
+- [x] Rename Project
+- [x] Delete Annotation
+- [x] Rehash Images
+- [x] Replace Class/Method
+- [ ] Mix
 
 ## Example
 
