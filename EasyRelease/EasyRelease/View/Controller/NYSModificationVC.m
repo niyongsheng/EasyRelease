@@ -48,8 +48,8 @@
         [alert addButtonWithTitle:@"Installed"];
         [alert addButtonWithTitle:@"Uninstall"];
         [alert setIcon:[NSImage imageNamed:@"terminal"]];
-        [alert setMessageText:@"Install shell"];
-        [alert setInformativeText:@"`brew install imagemagick`"];
+        [alert setMessageText:@"Install imagemagick"];
+        [alert setInformativeText:@"https://github.com/niyongsheng/EasyRelease/blob/master/README.md#Imagemagick"];
         [alert setAlertStyle:NSAlertStyleInformational];
         [alert beginSheetModalForWindow:[self.view window] completionHandler:^(NSModalResponse returnCode) {
             if (returnCode == NSAlertFirstButtonReturn) {

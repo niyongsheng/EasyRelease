@@ -81,6 +81,8 @@
 
 - (void)minBtnClicked:(id)sender {
     [self.view.window miniaturize:self];
+//    [NSApp.mainWindow miniaturize：nil];
+//    [NSApp.mainWindow performMiniaturize：self];
 }
 
 - (void)settingBtnClicked:(id)sender {

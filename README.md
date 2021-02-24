@@ -1,4 +1,4 @@
-![(logo)](https://github.com/niyongsheng/EasyRelease/blob/master/logo.png?raw=true&width=100&height=100)
+![(logo)](https://github.com/niyongsheng/EasyRelease/blob/main/logo.png?raw=true&width=100&height=100)
 LuckyDraw
 ===
 [![](https://img.shields.io/badge/platform-Mac-orange.svg)](https://developer.apple.com/mac/)
@@ -9,7 +9,7 @@ LuckyDraw
 > 轻松上架<br/>
 > Easy release to app store.
 
-## Features:
+## Features
 - [Rename Project]()
 - [Delete Annotation]()
 - [Rehash Images]()
