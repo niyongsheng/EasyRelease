@@ -10,6 +10,7 @@ EasyRelease
 > Automated obfuscation tools in SaaS scenarios.
 
 ## Features
+- [x] Auto Config
 - [x] Rename Project
 - [x] Delete Annotation
 - [x] Rehash Images
