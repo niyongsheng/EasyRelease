@@ -6,8 +6,8 @@ LuckyDraw
 ===
 
 ## Introduction
-> SaaS场景下基于同Git版本开发，解决手动分包上架问题。<br/>
-> Under the SaaS scenario, it is developed based on the same Git version to solve the problem of manual subcontracting on shelves.
+> SaaS场景下自动化解决机审上架问题。<br/>
+> SaaS scenario under the automatic solution of machine audit shelving problems.
 
 ## Features
 - [x] Rename Project
