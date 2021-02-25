@@ -17,7 +17,7 @@ EasyRelease
 - [x] Replace Class/Method
 - [ ] Mix
 
-## Example
+## Screenshot
 ![image](https://github.com/niyongsheng/niyongsheng.github.io/blob/master/Document/easy_release_demo.gif?raw=true)
 
 ## Imagemagick
@@ -25,6 +25,38 @@ EasyRelease
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
 brew install imagemagick
+```
+
+## Config
+```json
+{
+  "isRehashImages": true,
+  "isDelAnnotation": true,
+  "replaceArray": [
+    {
+      "Type": "class",
+      "OldPrefix": "NYS",
+      "NewPrefix": "NYSC",
+      "Enable": "1"
+    },
+    {
+      "Type": "method",
+      "OldPrefix": "NYS",
+      "NewPrefix": "NYSM",
+      "Enable": "1"
+    }
+  ],
+  "projectFileDirUrl": "file:\/\/\/Users\/niyongsheng\/Desktop\/EasyRelease\/EasyRelease.xcodeproj",
+  "projectDirUrl": "file:\/\/\/Users\/niyongsheng\/Desktop\/EasyRelease\/EasyRelease\/",
+  "ignoreArray": [
+    {
+      "name": "Pods",
+      "icon": "icon_ignore"
+    }
+  ],
+  "projectOldName": "EasyRelease",
+  "projectNewName": "EasyReleaseNew"
+}
 ```
 
 ## Remind
