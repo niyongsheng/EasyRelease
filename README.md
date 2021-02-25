@@ -15,7 +15,7 @@ EasyRelease
 - [x] Delete Annotation
 - [x] Rehash Images
 - [x] Replace Class/Method
-- [ ] Mix
+- [ ] Code Mix
 
 ## Screenshot
 ![image](https://github.com/niyongsheng/niyongsheng.github.io/blob/master/Document/easy_release_demo.gif?raw=true)
