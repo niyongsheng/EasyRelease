@@ -66,6 +66,13 @@
         NSString *str = [[NSString alloc] initWithData:[[NSData alloc] initWithContentsOfURL:url] encoding:NSUTF8StringEncoding];
         if ([NConfig yy_modelSetWithJSON:str]) {
             NYSConfigModel *model = [NYSConfigModel yy_modelWithJSON:str];
+            if (model.isSasS) {
+                NSString *pnStr = url.path.lastPathComponent.stringByDeletingPathExtension;
+                NSString *pPath = url.absoluteString.stringByDeletingLastPathComponent;
+                
+                model.projectFileDirUrl = [NSURL URLWithString:[pPath stringByAppendingFormat:@"/%@.xcodeproj", pnStr]];
+                model.projectDirUrl = [NSURL URLWithString:[pPath stringByAppendingFormat:@"/%@", pnStr]];
+            }
             NConfig = model;
             // 发送刷新配置通知
             [[NSNotificationCenter defaultCenter] postNotificationName:RefreshConfNotice object:nil userInfo:nil];
@@ -77,6 +84,16 @@
 }
 
 - (IBAction)downloadJsonFile:(NSButton *)sender {
+    if ([NYSUtils blankString:NConfig.projectFileDirUrl.path]) {
+        [NYSUtils showAlertPanel:@"Missing project file parameter" forWindow:self.view.window completionHandler:nil];
+        return;
+    }
+    
+    if ([NYSUtils blankString:NConfig.projectDirUrl.path]) {
+        [NYSUtils showAlertPanel:@"Missing project Directory parameter" forWindow:self.view.window completionHandler:nil];
+        return;
+    }
+    
     NSSavePanel *sPanel = [NSSavePanel savePanel];
     [sPanel setTitle:@"Save File"];
     [sPanel setMessage:@"Save Config Json File"];

@@ -1,14 +1,14 @@
 //
-//  NYSMixConfigVC.m
+//  NYSReplaceConfigVC.m
 //  EasyRelease
 //
 //  Created by 倪永胜 on 2021/2/19.
 //  Copyright © 2021 NYS. All rights reserved.
 //
 
-#import "NYSMixConfigVC.h"
+#import "NYSReplaceConfigVC.h"
 
-@interface NYSMixConfigVC ()
+@interface NYSReplaceConfigVC ()
 <
 NSTableViewDelegate,
 NSTableViewDataSource
@@ -23,12 +23,12 @@ NSTableViewDataSource
 
 @end
 
-@implementation NYSMixConfigVC
+@implementation NYSReplaceConfigVC
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    NConfig.mixArray = [NSMutableArray array];
+    NConfig.replaceArray = [NSMutableArray array];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     self.tableView.allowsMultipleSelection = NO;
@@ -66,11 +66,11 @@ NSTableViewDataSource
     NSDictionary *dic = @{@"OldPrefix": _prefixOldTextField.stringValue,
                           @"NewPrefix": _prefixNewTextField.stringValue,
                           @"Type": _typeBox.stringValue,
-                          @"Enable": @"1"};
-    [NConfig.mixArray addObject:dic];
+                          @"Enable": @(true)};
+    [NConfig.replaceArray addObject:dic];
     [self.tableView reloadData];
-    if (NConfig.mixArray.count > 0) {
-        [self.tableView editColumn:0 row:NConfig.mixArray.count - 1 withEvent:nil select:YES];
+    if (NConfig.replaceArray.count > 0) {
+        [self.tableView editColumn:0 row:NConfig.replaceArray.count - 1 withEvent:nil select:YES];
     }
 }
 
@@ -81,7 +81,7 @@ NSTableViewDataSource
         return;
     }
     [self.tableView removeRowsAtIndexes:[NSIndexSet indexSetWithIndex:row] withAnimation:NSTableViewAnimationEffectFade];
-    [NConfig.mixArray removeObjectAtIndex:row];
+    [NConfig.replaceArray removeObjectAtIndex:row];
 }
 
 #pragma mark - NSTableViewDelegate
@@ -92,27 +92,27 @@ NSTableViewDataSource
 
 #pragma mark - NSTableViewDataSource
 - (NSInteger)numberOfRowsInTableView:(NSTableView *)tableView {
-    return NConfig.mixArray.count;
+    return NConfig.replaceArray.count;
 }
 
 - (NSView *)tableView:(NSTableView *)tableView viewForTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)row {
-    NSDictionary *rowInfoDic = NConfig.mixArray[row];
+    NSDictionary *rowInfoDic = NConfig.replaceArray[row];
     NSString *key = tableColumn.identifier;
-    NSString *value = rowInfoDic[key];
+    id value = rowInfoDic[key];
     
     NSView *contentView = [tableView makeViewWithIdentifier:tableColumn.identifier owner:self];
     if ([key isEqualToString:@"NewPrefix"]) {
         NSTextField *textField = [contentView subviews][0];
-        textField.stringValue = value;
+        textField.stringValue = (NSString *)value;
     } else if ([key isEqualToString:@"OldPrefix"]) {
         NSTextField *textField = [contentView subviews][0];
-        textField.stringValue = value;
+        textField.stringValue = (NSString *)value;
     } else if ([key isEqualToString:@"Type"]) {
         NSComboBox *comboBox = [contentView subviews][0];
-        comboBox.stringValue = value;
+        comboBox.stringValue = (NSString *)value;
     } else {
         NSButton *checkBoxButton = [contentView subviews][0];
-        checkBoxButton.state = [value boolValue];
+        checkBoxButton.state = (BOOL)value;
     }
     
     return contentView;

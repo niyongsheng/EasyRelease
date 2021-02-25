@@ -13,12 +13,13 @@ NS_ASSUME_NONNULL_BEGIN
 @interface NYSConfigModel : NSObject
 @property (nonatomic, strong) NSURL *projectFileDirUrl;
 @property (nonatomic, strong) NSURL *projectDirUrl;
-@property (nonatomic, strong) NSMutableArray<NSDictionary *> *mixArray;
+@property (nonatomic, strong) NSMutableArray<NSDictionary *> *replaceArray;
 @property (nonatomic, strong) NSMutableArray<NSDictionary *> *ignoreArray;
 @property (nonatomic, strong) NSString *projectOldName;
 @property (nonatomic, strong) NSString *projectNewName;
 @property (nonatomic, assign) BOOL isDelAnnotation;
 @property (nonatomic, assign) BOOL isRehashImages;
+@property (nonatomic, assign) BOOL isSasS;
 @end
 
 NS_ASSUME_NONNULL_END

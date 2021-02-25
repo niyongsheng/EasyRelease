@@ -43,7 +43,7 @@
     [self.view addSubview:_modificationItemVC.view];
     
     _mixConfigItemVC = [[NYSNavigateItemVC alloc] init];
-    [_mixConfigItemVC setImageAndTitle:@"Mix Config" withIcon:@"icon_nav_normal_mix" isAutoFit:YES index:2 viewRect:NSMakeRect(0, 2 * ItemHeight, 168, ItemHeight)];
+    [_mixConfigItemVC setImageAndTitle:@"Replace Config" withIcon:@"icon_nav_normal_mix" isAutoFit:YES index:2 viewRect:NSMakeRect(0, 2 * ItemHeight, 168, ItemHeight)];
     [_mixConfigItemVC setBkColor:[NSColor colorWithRGBInt:0xffffff]];
     [_mixConfigItemVC setDelegate:self];
     [self addChildViewController:_mixConfigItemVC];

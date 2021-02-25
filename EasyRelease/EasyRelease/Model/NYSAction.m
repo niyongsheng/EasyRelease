@@ -89,7 +89,7 @@ void renameFile(NSString *oldPath, NSString *newPath) {
     }
     
     // 2.1类前缀+方法名替换
-    if (NConfig.mixArray.count > 0) {
+    if (NConfig.replaceArray.count > 0) {
         
         NSMutableArray<NSString *> *ignoreDirNames = [NSMutableArray array];
         for (NSDictionary *item in NConfig.ignoreArray) {
@@ -97,7 +97,7 @@ void renameFile(NSString *oldPath, NSString *newPath) {
         }
         
         NPostNotification(@"Mix prefix substitution...");
-        for (NSDictionary *item in NConfig.mixArray) {
+        for (NSDictionary *item in NConfig.replaceArray) {
             if ([item[@"Type"] isEqualToString:@"class"]) {
                 NSString *oldClassNamePrefix = item[@"OldPrefix"];
                 NSString *newClassNamePrefix = item[@"NewPrefix"];

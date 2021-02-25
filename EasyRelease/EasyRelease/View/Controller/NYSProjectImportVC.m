@@ -31,9 +31,7 @@ NSTableViewDataSource
     [super viewDidLoad];
     self.projectFileDirectory.editable = NO;
     self.projectDirectory.editable = NO;
-    
-    NConfig.ignoreArray = [NSMutableArray arrayWithArray:@[@{@"name": @"Pods", @"icon": IconName}]];
-    NSLog(@"ignore data %@", NConfig.ignoreArray);
+    NConfig.ignoreArray = [NSMutableArray arrayWithArray:@[@{@"name": @"Pods", @"enable": @(true)}]];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     self.tableView.allowsMultipleSelection = NO;
@@ -90,7 +88,7 @@ NSTableViewDataSource
         self.pfdPathCell.stringValue = pathStr;
         NSLog(@"忽略该文件夹下的文件：%@", pathStr);
         NSArray *pathArr = [pathStr componentsSeparatedByString:@"/"];
-        NSDictionary *dic = @{@"name": [pathArr lastObject], @"icon": IconName};
+        NSDictionary *dic = @{@"name": [pathArr lastObject], @"enable": @(true)};
         [NConfig.ignoreArray addObject:dic];
         [self.tableView reloadData];
     }
@@ -125,11 +123,10 @@ NSTableViewDataSource
     
     if ([key isEqualToString:@"Directory"]) {
         NSString *name = rowInfoDic[@"name"];
-        NSString *icon = rowInfoDic[@"icon"];
         NSTextField *textField = [contentView subviews][0];
         textField.stringValue = name;
         NSImageView *iconImageView = [contentView subviews][1];
-        iconImageView.image = [NYSUtils changeImage:[NSImage imageNamed:icon] WithTintColor:[NSColor colorWithRGBInt:ThemeColor]];
+        iconImageView.image = [NYSUtils changeImage:[NSImage imageNamed:@"icon_ignore"] WithTintColor:[NSColor colorWithRGBInt:ThemeColor]];
     }
     return contentView;
 }

@@ -30,20 +30,21 @@ brew install imagemagick
 ## Config
 ```json
 {
-  "isRehashImages": true,
+  "isSasS": false,
+  "isRehashImages": false,
   "isDelAnnotation": true,
   "replaceArray": [
     {
       "Type": "class",
       "OldPrefix": "NYS",
       "NewPrefix": "NYSC",
-      "Enable": "1"
+      "Enable": true
     },
     {
       "Type": "method",
       "OldPrefix": "NYS",
       "NewPrefix": "NYSM",
-      "Enable": "1"
+      "Enable": true
     }
   ],
   "projectFileDirUrl": "file:\/\/\/Users\/niyongsheng\/Desktop\/EasyRelease\/EasyRelease.xcodeproj",
@@ -51,7 +52,7 @@ brew install imagemagick
   "ignoreArray": [
     {
       "name": "Pods",
-      "icon": "icon_ignore"
+      "enable": true
     }
   ],
   "projectOldName": "EasyRelease",

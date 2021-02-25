@@ -55,8 +55,8 @@
 		C8ED272025DF820800AAA6D0 /* NYSProjectImportVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = C8ED271E25DF820800AAA6D0 /* NYSProjectImportVC.xib */; };
 		C8ED272C25DFA1C300AAA6D0 /* NYSModificationVC.m in Sources */ = {isa = PBXBuildFile; fileRef = C8ED272A25DFA1C300AAA6D0 /* NYSModificationVC.m */; };
 		C8ED272D25DFA1C300AAA6D0 /* NYSModificationVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = C8ED272B25DFA1C300AAA6D0 /* NYSModificationVC.xib */; };
-		C8ED273225DFA1EE00AAA6D0 /* NYSMixConfigVC.m in Sources */ = {isa = PBXBuildFile; fileRef = C8ED273025DFA1EE00AAA6D0 /* NYSMixConfigVC.m */; };
-		C8ED273325DFA1EE00AAA6D0 /* NYSMixConfigVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = C8ED273125DFA1EE00AAA6D0 /* NYSMixConfigVC.xib */; };
+		C8ED273225DFA1EE00AAA6D0 /* NYSReplaceConfigVC.m in Sources */ = {isa = PBXBuildFile; fileRef = C8ED273025DFA1EE00AAA6D0 /* NYSReplaceConfigVC.m */; };
+		C8ED273325DFA1EE00AAA6D0 /* NYSReplaceConfigVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = C8ED273125DFA1EE00AAA6D0 /* NYSReplaceConfigVC.xib */; };
 		C8ED273825DFA21700AAA6D0 /* NYSActionVC.m in Sources */ = {isa = PBXBuildFile; fileRef = C8ED273625DFA21700AAA6D0 /* NYSActionVC.m */; };
 		C8ED273925DFA21700AAA6D0 /* NYSActionVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = C8ED273725DFA21700AAA6D0 /* NYSActionVC.xib */; };
 /* End PBXBuildFile section */
@@ -149,9 +149,9 @@
 		C8ED272925DFA1C300AAA6D0 /* NYSModificationVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NYSModificationVC.h; sourceTree = "<group>"; };
 		C8ED272A25DFA1C300AAA6D0 /* NYSModificationVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NYSModificationVC.m; sourceTree = "<group>"; };
 		C8ED272B25DFA1C300AAA6D0 /* NYSModificationVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NYSModificationVC.xib; sourceTree = "<group>"; };
-		C8ED272F25DFA1EE00AAA6D0 /* NYSMixConfigVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NYSMixConfigVC.h; sourceTree = "<group>"; };
-		C8ED273025DFA1EE00AAA6D0 /* NYSMixConfigVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NYSMixConfigVC.m; sourceTree = "<group>"; };
-		C8ED273125DFA1EE00AAA6D0 /* NYSMixConfigVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NYSMixConfigVC.xib; sourceTree = "<group>"; };
+		C8ED272F25DFA1EE00AAA6D0 /* NYSReplaceConfigVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NYSReplaceConfigVC.h; sourceTree = "<group>"; };
+		C8ED273025DFA1EE00AAA6D0 /* NYSReplaceConfigVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NYSReplaceConfigVC.m; sourceTree = "<group>"; };
+		C8ED273125DFA1EE00AAA6D0 /* NYSReplaceConfigVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NYSReplaceConfigVC.xib; sourceTree = "<group>"; };
 		C8ED273525DFA21700AAA6D0 /* NYSActionVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NYSActionVC.h; sourceTree = "<group>"; };
 		C8ED273625DFA21700AAA6D0 /* NYSActionVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NYSActionVC.m; sourceTree = "<group>"; };
 		C8ED273725DFA21700AAA6D0 /* NYSActionVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NYSActionVC.xib; sourceTree = "<group>"; };
@@ -303,9 +303,9 @@
 				C8ED272925DFA1C300AAA6D0 /* NYSModificationVC.h */,
 				C8ED272A25DFA1C300AAA6D0 /* NYSModificationVC.m */,
 				C8ED272B25DFA1C300AAA6D0 /* NYSModificationVC.xib */,
-				C8ED272F25DFA1EE00AAA6D0 /* NYSMixConfigVC.h */,
-				C8ED273025DFA1EE00AAA6D0 /* NYSMixConfigVC.m */,
-				C8ED273125DFA1EE00AAA6D0 /* NYSMixConfigVC.xib */,
+				C8ED272F25DFA1EE00AAA6D0 /* NYSReplaceConfigVC.h */,
+				C8ED273025DFA1EE00AAA6D0 /* NYSReplaceConfigVC.m */,
+				C8ED273125DFA1EE00AAA6D0 /* NYSReplaceConfigVC.xib */,
 				C8ED273525DFA21700AAA6D0 /* NYSActionVC.h */,
 				C8ED273625DFA21700AAA6D0 /* NYSActionVC.m */,
 				C8ED273725DFA21700AAA6D0 /* NYSActionVC.xib */,
@@ -460,7 +460,7 @@
 				C86561AD25CCE830009CC8DE /* MainWindow.xib in Resources */,
 				C80DF40025E384A600DC36EC /* MLHudAlertSuccess.png in Resources */,
 				C80DF40225E384A600DC36EC /* ArtProgressHUD.xib in Resources */,
-				C8ED273325DFA1EE00AAA6D0 /* NYSMixConfigVC.xib in Resources */,
+				C8ED273325DFA1EE00AAA6D0 /* NYSReplaceConfigVC.xib in Resources */,
 				C81B0F6125E6470E0067CA1A /* NYSShowTipViewControlle.xib in Resources */,
 				C86560EB25CBF16F009CC8DE /* Assets.xcassets in Resources */,
 				C81B0F0825E624000067CA1A /* logo_str.erc in Resources */,
@@ -512,7 +512,7 @@
 				C8ED271F25DF820800AAA6D0 /* NYSProjectImportVC.m in Sources */,
 				C86561F325CCE830009CC8DE /* NYSRoundImageButton.m in Sources */,
 				C82E0A1325CD500400FCB4F3 /* NullSafe.m in Sources */,
-				C8ED273225DFA1EE00AAA6D0 /* NYSMixConfigVC.m in Sources */,
+				C8ED273225DFA1EE00AAA6D0 /* NYSReplaceConfigVC.m in Sources */,
 				C86561B625CCE830009CC8DE /* NYSTitleBarVC.m in Sources */,
 				C86561B425CCE830009CC8DE /* NYSNavigateItem.m in Sources */,
 				C81B0EA125E4F7DF0067CA1A /* NYSAction.m in Sources */,

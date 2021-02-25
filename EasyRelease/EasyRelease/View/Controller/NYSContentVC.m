@@ -10,7 +10,7 @@
 
 #import "NYSProjectImportVC.h"
 #import "NYSModificationVC.h"
-#import "NYSMixConfigVC.h"
+#import "NYSReplaceConfigVC.h"
 #import "NYSActionVC.h"
 
 #define MARGIN_SPACE 16
@@ -21,7 +21,7 @@
 
 @property (nonatomic, strong) NYSProjectImportVC *projectImportVC;
 @property (nonatomic, strong) NYSModificationVC *modification;
-@property (nonatomic, strong) NYSMixConfigVC *mixConfigVC;
+@property (nonatomic, strong) NYSReplaceConfigVC *replaceConfigVC;
 @property (nonatomic, strong) NYSActionVC *actionVC;
 @end
 
@@ -40,8 +40,8 @@
     _modification = [[NYSModificationVC alloc] initWithFrame:NSMakeRect(MARGIN_SPACE/2, MARGIN_SPACE/2, self.view.frame.size.width - MARGIN_SPACE, self.view.frame.size.height - MARGIN_SPACE)];
     [self addChildViewController:_modification];
     
-    _mixConfigVC = [[NYSMixConfigVC alloc] initWithFrame:NSMakeRect(MARGIN_SPACE/2, MARGIN_SPACE/2, self.view.frame.size.width - MARGIN_SPACE, self.view.frame.size.height - MARGIN_SPACE)];
-    [self addChildViewController:_mixConfigVC];
+    _replaceConfigVC = [[NYSReplaceConfigVC alloc] initWithFrame:NSMakeRect(MARGIN_SPACE/2, MARGIN_SPACE/2, self.view.frame.size.width - MARGIN_SPACE, self.view.frame.size.height - MARGIN_SPACE)];
+    [self addChildViewController:_replaceConfigVC];
     
     _actionVC = [[NYSActionVC alloc] initWithFrame:NSMakeRect(MARGIN_SPACE/2, MARGIN_SPACE/2, self.view.frame.size.width - MARGIN_SPACE, self.view.frame.size.height - MARGIN_SPACE)];
     [self addChildViewController:_actionVC];
@@ -61,7 +61,7 @@
             break;
             
         case 2:
-            [self replaceController:_mixConfigVC];
+            [self replaceController:_replaceConfigVC];
             break;
             
         case 3:
