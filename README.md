@@ -1,13 +1,13 @@
 ![(logo)](https://github.com/niyongsheng/EasyRelease/blob/main/logo.png?raw=true&width=100&height=100)
-LuckyDraw
+EasyRelease
 ===
 [![](https://img.shields.io/badge/platform-Mac-orange.svg)](https://developer.apple.com/mac/)
 [![](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/niyongsheng/EasyRelease/blob/master/LICENSE)
 ===
 
 ## Introduction
-> SaaS场景下自动化解决机审上架问题。<br/>
-> SaaS scenario under the automatic solution of machine audit shelving problems.
+> SaaS场景下自动化混淆工具。<br/>
+> Automated obfuscation tools in SaaS scenarios.
 
 ## Features
 - [x] Rename Project
