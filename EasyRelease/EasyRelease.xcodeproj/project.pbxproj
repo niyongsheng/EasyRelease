@@ -22,6 +22,7 @@
 		C81B0F0825E624000067CA1A /* logo_str.erc in Resources */ = {isa = PBXBuildFile; fileRef = C81B0F0725E624000067CA1A /* logo_str.erc */; };
 		C81B0F6025E6470E0067CA1A /* NYSShowTipViewControlle.m in Sources */ = {isa = PBXBuildFile; fileRef = C81B0F5E25E6470E0067CA1A /* NYSShowTipViewControlle.m */; };
 		C81B0F6125E6470E0067CA1A /* NYSShowTipViewControlle.xib in Resources */ = {isa = PBXBuildFile; fileRef = C81B0F5F25E6470E0067CA1A /* NYSShowTipViewControlle.xib */; };
+		C81B0F8A25E76AF80067CA1A /* rehash.sh in Resources */ = {isa = PBXBuildFile; fileRef = C81B0F8925E76AF80067CA1A /* rehash.sh */; };
 		C8212F8725E486FF00777EDB /* NYSConfigManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C8212F8625E486FF00777EDB /* NYSConfigManager.m */; };
 		C82E0A1325CD500400FCB4F3 /* NullSafe.m in Sources */ = {isa = PBXBuildFile; fileRef = C82E0A1225CD500300FCB4F3 /* NullSafe.m */; };
 		C82E0B7F25CE766C00FCB4F3 /* NYSTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = C82E0B7E25CE766C00FCB4F3 /* NYSTool.swift */; };
@@ -85,6 +86,7 @@
 		C81B0F5D25E6470E0067CA1A /* NYSShowTipViewControlle.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NYSShowTipViewControlle.h; sourceTree = "<group>"; };
 		C81B0F5E25E6470E0067CA1A /* NYSShowTipViewControlle.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NYSShowTipViewControlle.m; sourceTree = "<group>"; };
 		C81B0F5F25E6470E0067CA1A /* NYSShowTipViewControlle.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NYSShowTipViewControlle.xib; sourceTree = "<group>"; };
+		C81B0F8925E76AF80067CA1A /* rehash.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = rehash.sh; sourceTree = "<group>"; };
 		C8212F8525E486FF00777EDB /* NYSConfigManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NYSConfigManager.h; sourceTree = "<group>"; };
 		C8212F8625E486FF00777EDB /* NYSConfigManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NYSConfigManager.m; sourceTree = "<group>"; };
 		C82E09DA25CD3CCC00FCB4F3 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
@@ -374,6 +376,7 @@
 				C81B0E9F25E4F7DF0067CA1A /* NYSAction.h */,
 				C81B0EA025E4F7DF0067CA1A /* NYSAction.m */,
 				C81B0F0725E624000067CA1A /* logo_str.erc */,
+				C81B0F8925E76AF80067CA1A /* rehash.sh */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -453,6 +456,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C8ED272025DF820800AAA6D0 /* NYSProjectImportVC.xib in Resources */,
+				C81B0F8A25E76AF80067CA1A /* rehash.sh in Resources */,
 				C86561AD25CCE830009CC8DE /* MainWindow.xib in Resources */,
 				C80DF40025E384A600DC36EC /* MLHudAlertSuccess.png in Resources */,
 				C80DF40225E384A600DC36EC /* ArtProgressHUD.xib in Resources */,

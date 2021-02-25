@@ -59,7 +59,7 @@ NSTableViewDataSource
     [oPanel setCanChooseDirectories:NO];
     [oPanel setCanChooseFiles:YES];
     [oPanel setAllowedFileTypes:@[@"xcodeproj"]];
-    [oPanel setDirectoryURL:[NSURL URLWithString:NSHomeDirectory()]];
+//    [oPanel setDirectoryURL:[NSURL URLWithString:NSHomeDirectory()]];
     if ([oPanel runModal] == NSModalResponseOK) {
         NSURL *url = [[oPanel URLs] objectAtIndex:0];
         NConfig.projectFileDirUrl = url;

@@ -39,7 +39,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.actionInfoTextView.string = @"^^\nEasy Release is already...";
+    self.actionInfoTextView.string = @"Hi ~\nEasy Release is already...";
 //    self.actionInfoTextView.textColor = [NSColor colorWithRGBInt:ThemeColor];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(ActionInfoNotificationHandler:) name:ActionInfoNotice object:nil];

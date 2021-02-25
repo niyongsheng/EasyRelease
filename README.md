@@ -6,8 +6,8 @@ LuckyDraw
 ===
 
 ## Introduction
-> 轻松上架<br/>
-> Easy release to app store.
+> SaaS场景下基于同Git版本开发，解决手动分包上架问题。<br/>
+> Under the SaaS scenario, it is developed based on the same Git version to solve the problem of manual subcontracting on shelves.
 
 ## Features
 - [x] Rename Project
@@ -17,6 +17,7 @@ LuckyDraw
 - [ ] Mix
 
 ## Example
+![image](https://github.com/niyongsheng/niyongsheng.github.io/blob/master/Document/easy_release_demo.gif?raw=true)
 
 ## Imagemagick
 ```shell
@@ -26,7 +27,7 @@ brew install imagemagick
 ```
 
 ## Remind
-`macOS 10.5+ `
+`macOS 10.15+ `
 
 ## Contribution
 Reward[:lollipop:](https://github.com/niyongsheng/niyongsheng.github.io/blob/master/Beg/README.md)  Encourage[:heart:](https://github.com/niyongsheng/EasyRelease/stargazers)

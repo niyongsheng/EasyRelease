@@ -57,7 +57,7 @@ void renameFile(NSString *oldPath, NSString *newPath) {
 
 #pragma mark - 入口
 - (void)action {
-    NPostNotification(@"Is being prepared\n");
+    NPostNotification(@"\nIs being prepared\n");
     
     // 1.1修改工程名
     if (NConfig.projectFileDirUrl && NConfig.projectOldName && NConfig.projectNewName) {
@@ -77,7 +77,7 @@ void renameFile(NSString *oldPath, NSString *newPath) {
         }
         NPostNotification(@"Deleting comments and blank lines is completed\n");
     }
-
+    
     
     // 1.3修改图片hash
     if (NConfig.isRehashImages) {
@@ -95,7 +95,7 @@ void renameFile(NSString *oldPath, NSString *newPath) {
         for (NSDictionary *item in NConfig.ignoreArray) {
             [ignoreDirNames addObject:item[@"name"]];
         }
-
+        
         NPostNotification(@"Mix prefix substitution...");
         for (NSDictionary *item in NConfig.mixArray) {
             if ([item[@"Type"] isEqualToString:@"class"]) {
@@ -126,7 +126,7 @@ void renameFile(NSString *oldPath, NSString *newPath) {
                     NSString *objPrefix = [NSString stringWithFormat:@"Modifying the class name prefix is complete. %s > %s\n", oldClassNamePrefix.UTF8String, newClassNamePrefix.UTF8String];
                     NPostNotification(objPrefix);
                 }
-
+                
             } else if ([item[@"Type"] isEqualToString:@"method"]) {
                 NSString *oldMethodNamePrefix = item[@"OldPrefix"];
                 NSString *newMethodNamePrefix = item[@"NewPrefix"];
@@ -152,36 +152,36 @@ void renameFile(NSString *oldPath, NSString *newPath) {
     
     NPostNotification(@"Easy Release Done.");
     
-    NPostNotification(@"\n\n***** Tips *****\n**`pod install`**\n***** End *****\n");
+    NPostNotification(@"\n\n***** Tips *****\n* pod install *\n***** End *****\n");
 }
 
 
 #pragma mark - Xcassets中的图片rehash
 void handleXcassetsFiles(NSString *directory) {
+    NSLog(@"Xcassets dir :%@", directory);
+    
     NSTask *task = [[NSTask alloc] init];
     NSPipe *pipe = [NSPipe pipe];
     [task setStandardOutput:pipe];
     [task setStandardError:pipe];
+    [task setLaunchPath:@"/bin/sh"];
+    NSString *path = [[NSBundle mainBundle] pathForResource:@"rehash" ofType:@"sh"];
+    [task setArguments:[NSArray arrayWithObjects:path, directory, nil]];
+    
     NSFileHandle *handle = [pipe fileHandleForReading];
-    [task setLaunchPath:@"/usr/bin"];
-    NSString *cd = [NSString stringWithFormat:@"cd %@ ;", directory];
-    [task setArguments:[NSArray arrayWithObjects:cd, @"ls -l ;", @"find . -iname \"*.png\" -exec echo {} ; -exec convert {} {} ;", nil]];
+    
     [task launch];
     
-    NSString *result = [[NSString alloc] initWithData:[handle readDataToEndOfFile] encoding:NSASCIIStringEncoding];
-    NPostNotification(result);
- /*
-    NSFileManager *fm = [NSFileManager defaultManager];
-    NSArray<NSString *> *files = [fm contentsOfDirectoryAtPath:directory error:nil];
-    BOOL isDirectory;
-    for (NSString *fileName in files) {
-        NSString *filePath = [directory stringByAppendingPathComponent:fileName];
-        if ([fm fileExistsAtPath:filePath isDirectory:&isDirectory] && isDirectory) {
-            handleXcassetsFiles(filePath);
-            continue;
-        }
-    }
-  */
+    [[NSNotificationCenter defaultCenter] addObserverForName:NSTaskDidTerminateNotification
+                                                      object:nil
+                                                       queue:nil
+                                                  usingBlock:^(NSNotification* notification) {
+        NSData *data = [handle readDataToEndOfFile];
+        NSString *result = [[NSString alloc] initWithData:data encoding: NSUTF8StringEncoding];
+        
+        NPostNotification(result);
+        NSLog(@"Result: %@", result);
+    }];
 }
 
 #pragma mark - 删除注释
@@ -430,7 +430,7 @@ void modifyClassNamePrefix(NSMutableString *projectContent, NSString *sourceCode
         if ([fileName hasPrefix:oldName]) {
             newClassName = [newName stringByAppendingString:[fileName substringFromIndex:oldName.length]];
         } else {
-//            newClassName = [newName stringByAppendingString:fileName];
+            //            newClassName = [newName stringByAppendingString:fileName];
             //不包含前缀的不加新前缀
             newClassName = fileName;
         }
@@ -480,7 +480,7 @@ void modifyClassNamePrefix(NSMutableString *projectContent, NSString *sourceCode
                 @autoreleasepool {
                     modifyFilesClassName(sourceCodeDir, fileName, newClassName);
                 }
-//                continue;
+                //                continue;
             }
         } else if ([fileExtension isEqualToString:@"swift"]) {
             NSString *oldFilePath = [[sourceCodeDir stringByAppendingPathComponent:fileName] stringByAppendingPathExtension:@"swift"];
@@ -515,9 +515,9 @@ void changePrefix(NSString *sourceCodeDir, NSArray<NSString *> *ignoreDirNames,N
     for (NSString *filePath in files) {
         NSString *path = [sourceCodeDir stringByAppendingPathComponent:filePath];
         if ([fm fileExistsAtPath:path isDirectory:&isDirectory] && isDirectory) {
-//            if (![ignoreDirNames containsObject:filePath]) {
-//                changePrefix(path, ignoreDirNames, oldName, newName);
-//            }
+            //            if (![ignoreDirNames containsObject:filePath]) {
+            //                changePrefix(path, ignoreDirNames, oldName, newName);
+            //            }
             changePrefix(path, ignoreDirNames, oldName, newName);
             continue;
         }
@@ -526,10 +526,10 @@ void changePrefix(NSString *sourceCodeDir, NSArray<NSString *> *ignoreDirNames,N
         NSString *fileExtension = filePath.pathExtension;
         if ([fileExtension isEqualToString:@"h"]) {
             ///概率修改
-//            NSInteger k = arc4random()%100;
-//            if(k>kPercent){
-//                continue;
-//            }
+            //            NSInteger k = arc4random()%100;
+            //            if(k>kPercent){
+            //                continue;
+            //            }
             NSString *mFileName = [fileName stringByAppendingPathExtension:@"m"];
             NSString *mmFileName = [fileName stringByAppendingPathExtension:@"mm"];
             if ([files containsObject:mFileName]){
