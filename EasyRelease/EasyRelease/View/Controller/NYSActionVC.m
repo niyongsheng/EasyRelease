@@ -101,8 +101,9 @@
     [sPanel setAllowedFileTypes:[NSArray arrayWithObjects:@"json", nil]];
     [sPanel setCanCreateDirectories:YES];
     [sPanel setCanSelectHiddenExtension:YES];
-    [sPanel setNameFieldStringValue:@"EasyReleaseConfig"];
-    [sPanel setDirectoryURL:NULL];
+    [sPanel setNameFieldStringValue:NConfig.projectFileDirUrl.path.lastPathComponent.stringByDeletingPathExtension];
+    NSString *pPath = NConfig.projectFileDirUrl.absoluteString.stringByDeletingLastPathComponent;
+    [sPanel setDirectoryURL:[NSURL URLWithString:pPath]];
     
     __block NSString *chooseFile;
     [sPanel beginSheetModalForWindow:[NSApp mainWindow] completionHandler:^(NSModalResponse result) {
