@@ -29,8 +29,11 @@
     [noticeIcon setImage:@"icon_notice" isAutoFit:NO];
     [self.view addSubview:noticeIcon];
     
+    NSDictionary *infoDictionary = [[NSBundle mainBundle] infoDictionary];
+    NSString *app_Version = [infoDictionary objectForKey:@"CFBundleShortVersionString"];
+    
     _noticeText = [[NYSFitSizeTextButton alloc] initWithFrame:NSMakeRect(22, 0, 400, 15)];
-    [_noticeText setTitle:@"EasyRelease alpha 0.0.1 version"
+    [_noticeText setTitle:[NSString stringWithFormat:@"EasyRelease %@ version, click to visit in github.", app_Version]
           withNormalColor:[NSColor colorWithRGBInt:0xffffff]
                hoverColor:[NSColor colorWithRGBInt:0xffffff]];
     [_noticeText setTarget:self];

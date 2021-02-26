@@ -90,6 +90,7 @@
     NSString *app_Version = [infoDictionary objectForKey:@"CFBundleShortVersionString"];
     
     NSAlert *alert = [[NSAlert alloc] init];
+    [alert setIcon:[NSImage imageNamed:@"user_photo_default"]];
     [alert addButtonWithTitle:@"Issues"];
     [alert addButtonWithTitle:@"Cancel"];
     [alert setMessageText:@"Easy Release"];

@@ -31,6 +31,7 @@ brew install imagemagick
 ```json
 {
   "isSasS": false,
+  "isAuto": false,
   "isRehashImages": false,
   "isDelAnnotation": true,
   "replaceArray": [

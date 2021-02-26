@@ -66,16 +66,22 @@
         NSString *str = [[NSString alloc] initWithData:[[NSData alloc] initWithContentsOfURL:url] encoding:NSUTF8StringEncoding];
         if ([NConfig yy_modelSetWithJSON:str]) {
             NYSConfigModel *model = [NYSConfigModel yy_modelWithJSON:str];
-            if (model.isSasS) {
+            if (model.isSasS) { // SasS环境下自动配置
                 NSString *pnStr = url.path.lastPathComponent.stringByDeletingPathExtension;
                 NSString *pPath = url.absoluteString.stringByDeletingLastPathComponent;
-                
-                model.projectFileDirUrl = [NSURL URLWithString:[pPath stringByAppendingFormat:@"/%@.xcodeproj", pnStr]];
-                model.projectDirUrl = [NSURL URLWithString:[pPath stringByAppendingFormat:@"/%@", pnStr]];
+                if ([NYSUtils blankString:model.projectFileDirUrl.absoluteString]) {
+                    model.projectFileDirUrl = [NSURL URLWithString:[pPath stringByAppendingFormat:@"/%@.xcodeproj", pnStr]];
+                }
+                if ([NYSUtils blankString:model.projectDirUrl.absoluteString]) {
+                    model.projectDirUrl = [NSURL URLWithString:[pPath stringByAppendingFormat:@"/%@", pnStr]];
+                }
                 
                 if (model.isAuto) {
                     NSString *prefixStr = [NYSUtils generateRandomString:4];
-                    if ([NYSUtils blankString:model.projectNewName] && ![NYSUtils blankString:model.projectOldName]) {
+                    if ([NYSUtils blankString:model.projectNewName] && [NYSUtils blankString:model.projectOldName]) {
+                        model.projectOldName = pnStr;
+                        model.projectNewName = [NSString stringWithFormat:@"%@_%@", prefixStr, pnStr];
+                    } else if ([NYSUtils blankString:model.projectNewName] && ![NYSUtils blankString:model.projectOldName]) {
                         model.projectNewName = [NSString stringWithFormat:@"%@_%@", prefixStr, model.projectOldName];
                     }
                     
@@ -87,7 +93,7 @@
                         }
                     }
                 } else {
-                    // TODO手动处理
+                    // TODO手动配置
                     
                 }
             }
