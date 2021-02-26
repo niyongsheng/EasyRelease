@@ -72,6 +72,24 @@
                 
                 model.projectFileDirUrl = [NSURL URLWithString:[pPath stringByAppendingFormat:@"/%@.xcodeproj", pnStr]];
                 model.projectDirUrl = [NSURL URLWithString:[pPath stringByAppendingFormat:@"/%@", pnStr]];
+                
+                if (model.isAuto) {
+                    NSString *prefixStr = [NYSUtils generateRandomString:4];
+                    if ([NYSUtils blankString:model.projectNewName] && ![NYSUtils blankString:model.projectOldName]) {
+                        model.projectNewName = [NSString stringWithFormat:@"%@_%@", prefixStr, model.projectOldName];
+                    }
+                    
+                    for (int i = 0; i < model.replaceArray.count; i++) {
+                        NSDictionary *replaceDict = model.replaceArray[i];
+                        if ([NYSUtils blankString:replaceDict[@"NewPrefix"]] && ![NYSUtils blankString:replaceDict[@"OldPrefix"]]) {
+                            NSString *newValue = [NSString stringWithFormat:@"%@_%@", prefixStr, replaceDict[@"OldPrefix"]];
+                            [model.replaceArray[i] setValue:newValue forKey:@"NewPrefix"];
+                        }
+                    }
+                } else {
+                    // TODO手动处理
+                    
+                }
             }
             NConfig = model;
             // 发送刷新配置通知

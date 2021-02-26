@@ -56,6 +56,11 @@ void renameFile(NSString *oldPath, NSString *newPath) {
 }
 
 #pragma mark - 入口
+static void easyReleaseDono() {
+    NPostNotification(@"Easy Release Done.");
+    NPostNotification(@"\n\nPlease run shell: pod install\n");
+}
+
 - (void)action {
     NPostNotification(@"\nIs being prepared\n");
     
@@ -150,16 +155,13 @@ void renameFile(NSString *oldPath, NSString *newPath) {
         NPostNotification(@"Mix prefix substitution is completed");
     }
     
-    NPostNotification(@"Easy Release Done.");
-    
-    NPostNotification(@"\n\n***** Tips *****\n* pod install *\n***** End *****\n");
+    easyReleaseDono();
 }
 
 
 #pragma mark - Xcassets中的图片rehash
 void handleXcassetsFiles(NSString *directory) {
     NSLog(@"Xcassets dir :%@", directory);
-    
     NSTask *task = [[NSTask alloc] init];
     NSPipe *pipe = [NSPipe pipe];
     [task setStandardOutput:pipe];
@@ -168,19 +170,33 @@ void handleXcassetsFiles(NSString *directory) {
     NSString *path = [[NSBundle mainBundle] pathForResource:@"rehash" ofType:@"sh"];
     [task setArguments:[NSArray arrayWithObjects:path, directory, nil]];
     
-    NSFileHandle *handle = [pipe fileHandleForReading];
-    
     [task launch];
+//    [task waitUntilExit];
+
+    NSFileHandle *handle = [pipe fileHandleForReading];
+    [handle waitForDataInBackgroundAndNotify];
     
-    [[NSNotificationCenter defaultCenter] addObserverForName:NSTaskDidTerminateNotification
-                                                      object:nil
+    __block NSInteger blankCount = 0;
+    [[NSNotificationCenter defaultCenter] addObserverForName:NSFileHandleDataAvailableNotification
+                                                      object:handle
                                                        queue:nil
                                                   usingBlock:^(NSNotification* notification) {
-        NSData *data = [handle readDataToEndOfFile];
+        NSData *data = [handle availableData];
         NSString *result = [[NSString alloc] initWithData:data encoding: NSUTF8StringEncoding];
         
-        NPostNotification(result);
-        NSLog(@"Result: %@", result);
+        dispatch_async(dispatch_get_main_queue(), ^{
+            NPostNotification(result);
+        });
+        
+        if ([NYSUtils blankString:result]) {
+            blankCount++;
+        }
+        
+        if (blankCount < 5) {
+            [handle waitForDataInBackgroundAndNotify];
+        } else {
+            easyReleaseDono();
+        }
     }];
 }
 

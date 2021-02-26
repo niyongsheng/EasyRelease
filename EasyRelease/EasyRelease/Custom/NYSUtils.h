@@ -17,6 +17,9 @@ NS_ASSUME_NONNULL_BEGIN
 + (NSImage *)changeImage:(NSImage *)aImage WithTintColor:(NSColor *)tintColor;
 
 + (BOOL)blankString:(NSString *)string;
+
++ (NSString *)generateRandomString:(int)lenght;
+
 @end
 
 NS_ASSUME_NONNULL_END

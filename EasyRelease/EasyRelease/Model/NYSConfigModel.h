@@ -19,6 +19,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSString *projectNewName;
 @property (nonatomic, assign) BOOL isDelAnnotation;
 @property (nonatomic, assign) BOOL isRehashImages;
+@property (nonatomic, assign) BOOL isAuto;
 @property (nonatomic, assign) BOOL isSasS;
 @end
 
