@@ -64,16 +64,6 @@ static void easyReleaseDono() {
 - (void)action {
     NPostNotification(@"\nIs being prepared\n");
     
-    // 1.1修改工程名
-    if (NConfig.projectFileDirUrl && NConfig.projectOldName && NConfig.projectNewName) {
-        @autoreleasepool {
-            NSString *dir = NConfig.projectFileDirUrl.path.stringByDeletingLastPathComponent;
-            modifyProjectName(dir, NConfig.projectOldName, NConfig.projectNewName);
-            NPostNotification(@"Changing project name...\n");
-        }
-        NPostNotification(@"Modification of project name completed\n");
-    }
-    
     // 1.2删除多余的空格和注释
     if (NConfig.isDelAnnotation) {
         @autoreleasepool {
@@ -155,6 +145,16 @@ static void easyReleaseDono() {
         NPostNotification(@"Mix prefix substitution is completed");
     }
     
+    // 1.1修改工程名
+    if (NConfig.projectFileDirUrl && NConfig.projectOldName && NConfig.projectNewName) {
+        @autoreleasepool {
+            NSString *dir = NConfig.projectFileDirUrl.path.stringByDeletingLastPathComponent;
+            modifyProjectName(dir, NConfig.projectOldName, NConfig.projectNewName);
+            NPostNotification(@"Changing project name...\n");
+        }
+        NPostNotification(@"Modification of project name completed\n");
+    }
+    
     easyReleaseDono();
 }
 
@@ -162,6 +162,15 @@ static void easyReleaseDono() {
 #pragma mark - Xcassets中的图片rehash
 void handleXcassetsFiles(NSString *directory) {
     NSLog(@"Xcassets dir :%@", directory);
+    NSFileManager *fm = [NSFileManager defaultManager];
+    BOOL isDirectory;
+    [fm fileExistsAtPath:directory isDirectory:&isDirectory];
+    if (!isDirectory) {
+        NSString *info = [NSString stringWithFormat:@"\nImage resource path is not exists at path:%@\n", directory];
+        NPostNotification(info);
+        return;
+    }
+    
     NSTask *task = [[NSTask alloc] init];
     NSPipe *pipe = [NSPipe pipe];
     [task setStandardOutput:pipe];
@@ -171,7 +180,6 @@ void handleXcassetsFiles(NSString *directory) {
     [task setArguments:[NSArray arrayWithObjects:path, directory, nil]];
     
     [task launch];
-//    [task waitUntilExit];
 
     NSFileHandle *handle = [pipe fileHandleForReading];
     [handle waitForDataInBackgroundAndNotify];
@@ -195,9 +203,11 @@ void handleXcassetsFiles(NSString *directory) {
         if (blankCount < 5) {
             [handle waitForDataInBackgroundAndNotify];
         } else {
-            easyReleaseDono();
+            NPostNotification(@"\nImage files rehash completed.\n");
         }
     }];
+    
+    [task waitUntilExit];
 }
 
 #pragma mark - 删除注释
@@ -213,10 +223,10 @@ void deleteComments(NSString *directory) {
         }
         if (![fileName hasSuffix:@".h"] && ![fileName hasSuffix:@".m"] && ![fileName hasSuffix:@".swift"]) continue;
         NSMutableString *fileContent = [NSMutableString stringWithContentsOfFile:filePath encoding:NSUTF8StringEncoding error:nil];
-        regularReplacement(fileContent, @"([^:/])//.*",             @"\\1");
+        regularReplacement(fileContent, @"([^:/])//.*",              @"\\1");
         regularReplacement(fileContent, @"^//.*",                   @"");
-        regularReplacement(fileContent, @"/\\*{1,2}[\\s\\S]*?\\*/", @"");
-        regularReplacement(fileContent, @"^\\s*\\n",                @"");
+//        regularReplacement(fileContent, @"/\\*{1,2}[\\s\\S]*?\\*/",   @"");
+        regularReplacement(fileContent, @"^\\s*\\n",                 @"");
         [fileContent writeToFile:filePath atomically:YES encoding:NSUTF8StringEncoding error:nil];
     }
 }

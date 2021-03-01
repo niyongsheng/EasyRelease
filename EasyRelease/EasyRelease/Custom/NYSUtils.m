@@ -59,7 +59,7 @@
 }
 
 + (NSString *)generateRandomString:(int)lenght {
-    NSString *sourceStr = @"0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    NSString *sourceStr = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
     NSMutableString *resultStr = [[NSMutableString alloc] init];
     for (int i = 0; i < lenght; i++) {
         unsigned index = rand() % [sourceStr length];

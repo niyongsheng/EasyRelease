@@ -88,8 +88,10 @@
                     for (int i = 0; i < model.replaceArray.count; i++) {
                         NSDictionary *replaceDict = model.replaceArray[i];
                         if ([NYSUtils blankString:replaceDict[@"NewPrefix"]] && ![NYSUtils blankString:replaceDict[@"OldPrefix"]]) {
+                            NSMutableDictionary *mutableReplaceDict = [NSMutableDictionary dictionaryWithDictionary:replaceDict];
                             NSString *newValue = [NSString stringWithFormat:@"%@_%@", prefixStr, replaceDict[@"OldPrefix"]];
-                            [model.replaceArray[i] setValue:newValue forKey:@"NewPrefix"];
+                            [mutableReplaceDict setValue:newValue forKey:@"NewPrefix"];
+                            model.replaceArray[i] = mutableReplaceDict;
                         }
                     }
                 } else {
