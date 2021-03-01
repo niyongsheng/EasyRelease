@@ -51,6 +51,8 @@
 		C86561F325CCE830009CC8DE /* NYSRoundImageButton.m in Sources */ = {isa = PBXBuildFile; fileRef = C865619825CCE830009CC8DE /* NYSRoundImageButton.m */; };
 		C86561F425CCE830009CC8DE /* NYSTextButton.m in Sources */ = {isa = PBXBuildFile; fileRef = C865619C25CCE830009CC8DE /* NYSTextButton.m */; };
 		C86561F825CCE830009CC8DE /* NSColor+RGBValue.m in Sources */ = {isa = PBXBuildFile; fileRef = C86561A625CCE830009CC8DE /* NSColor+RGBValue.m */; };
+		C8B67ABB25ECB2E300EF9A39 /* GitHubUpdates.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C8B67ABA25ECB2E200EF9A39 /* GitHubUpdates.framework */; };
+		C8B67ABE25ECB31D00EF9A39 /* GitHubUpdates.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = C8B67ABA25ECB2E200EF9A39 /* GitHubUpdates.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		C8ED271F25DF820800AAA6D0 /* NYSProjectImportVC.m in Sources */ = {isa = PBXBuildFile; fileRef = C8ED271D25DF820800AAA6D0 /* NYSProjectImportVC.m */; };
 		C8ED272025DF820800AAA6D0 /* NYSProjectImportVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = C8ED271E25DF820800AAA6D0 /* NYSProjectImportVC.xib */; };
 		C8ED272C25DFA1C300AAA6D0 /* NYSModificationVC.m in Sources */ = {isa = PBXBuildFile; fileRef = C8ED272A25DFA1C300AAA6D0 /* NYSModificationVC.m */; };
@@ -60,6 +62,19 @@
 		C8ED273825DFA21700AAA6D0 /* NYSActionVC.m in Sources */ = {isa = PBXBuildFile; fileRef = C8ED273625DFA21700AAA6D0 /* NYSActionVC.m */; };
 		C8ED273925DFA21700AAA6D0 /* NYSActionVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = C8ED273725DFA21700AAA6D0 /* NYSActionVC.xib */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		C8B67ABC25ECB30700EF9A39 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				C8B67ABE25ECB31D00EF9A39 /* GitHubUpdates.framework in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		C80DF23025E0A74B00DC36EC /* NYSConfigModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NYSConfigModel.h; sourceTree = "<group>"; };
@@ -143,6 +158,7 @@
 		C865619C25CCE830009CC8DE /* NYSTextButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NYSTextButton.m; sourceTree = "<group>"; };
 		C86561A525CCE830009CC8DE /* NSColor+RGBValue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSColor+RGBValue.h"; sourceTree = "<group>"; };
 		C86561A625CCE830009CC8DE /* NSColor+RGBValue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSColor+RGBValue.m"; sourceTree = "<group>"; };
+		C8B67ABA25ECB2E200EF9A39 /* GitHubUpdates.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GitHubUpdates.framework; path = "../../../../../Library/Developer/Xcode/DerivedData/GitHubUpdates-debfpwgataftlzbjpdveysldqoqp/Build/Products/Debug/GitHubUpdates.framework"; sourceTree = "<group>"; };
 		C8ED271C25DF820800AAA6D0 /* NYSProjectImportVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NYSProjectImportVC.h; sourceTree = "<group>"; };
 		C8ED271D25DF820800AAA6D0 /* NYSProjectImportVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NYSProjectImportVC.m; sourceTree = "<group>"; };
 		C8ED271E25DF820800AAA6D0 /* NYSProjectImportVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NYSProjectImportVC.xib; sourceTree = "<group>"; };
@@ -162,6 +178,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C8B67ABB25ECB2E300EF9A39 /* GitHubUpdates.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -210,6 +227,7 @@
 			children = (
 				C86560E625CBF16D009CC8DE /* EasyRelease */,
 				C86560E525CBF16D009CC8DE /* Products */,
+				C8B67AB625ECB24E00EF9A39 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -319,6 +337,7 @@
 		C865618925CCE830009CC8DE /* Custom */ = {
 			isa = PBXGroup;
 			children = (
+				C8B67ABA25ECB2E200EF9A39 /* GitHubUpdates.framework */,
 				C81B0E9525E4E12F0067CA1A /* YYModel */,
 				C80DF3E525E384A600DC36EC /* ArtProgressHUD */,
 				C865618A25CCE830009CC8DE /* Controls */,
@@ -396,6 +415,13 @@
 			path = SupportingFiles;
 			sourceTree = "<group>";
 		};
+		C8B67AB625ECB24E00EF9A39 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -406,6 +432,7 @@
 				C86560E025CBF16D009CC8DE /* Sources */,
 				C86560E125CBF16D009CC8DE /* Frameworks */,
 				C86560E225CBF16D009CC8DE /* Resources */,
+				C8B67ABC25ECB30700EF9A39 /* CopyFiles */,
 			);
 			buildRules = (
 			);
@@ -657,13 +684,17 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = F9J739W8Y4;
 				ENABLE_HARDENED_RUNTIME = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/EasyRelease/Custom",
+				);
 				GCC_PREFIX_HEADER = "$(SRCROOT)/EasyRelease/SupportingFiles/PrefixHeader.pch";
 				INFOPLIST_FILE = EasyRelease/SupportingFiles/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MARKETING_VERSION = 1.1;
+				MARKETING_VERSION = 1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.nys.EasyRelease;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_INSTALL_OBJC_HEADER = YES;
@@ -688,13 +719,17 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = F9J739W8Y4;
 				ENABLE_HARDENED_RUNTIME = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/EasyRelease/Custom",
+				);
 				GCC_PREFIX_HEADER = "$(SRCROOT)/EasyRelease/SupportingFiles/PrefixHeader.pch";
 				INFOPLIST_FILE = EasyRelease/SupportingFiles/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MARKETING_VERSION = 1.1;
+				MARKETING_VERSION = 1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.nys.EasyRelease;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_INSTALL_OBJC_HEADER = YES;

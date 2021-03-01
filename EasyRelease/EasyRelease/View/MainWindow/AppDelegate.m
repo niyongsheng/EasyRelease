@@ -7,10 +7,13 @@
 
 #import "AppDelegate.h"
 #import "MainWindowController.h"
+#import <GitHubUpdates/GitHubUpdates.h>
 
 @interface AppDelegate ()
 
 @property (nonatomic, strong) MainWindowController *mainWindowController;
+
+@property (nonatomic, strong) GitHubUpdater *updater;
 
 @end
 
@@ -22,6 +25,11 @@
     [[_mainWindowController window] center];
     [_mainWindowController showWindow:self];
     self.mainWC = _mainWindowController;
+    
+    self.updater = [GitHubUpdater new];
+    self.updater.user = @"niyongsheng";
+    self.updater.repository = @"EasyRelease";
+    [self.updater checkForUpdatesInBackground];
 }
 
 
