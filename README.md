@@ -39,13 +39,13 @@ brew install imagemagick
       "Type": "class",
       "OldPrefix": "NYS",
       "NewPrefix": "NYSC",
-      "Enable": true
+      "Enable": "1"
     },
     {
       "Type": "method",
       "OldPrefix": "NYS",
       "NewPrefix": "NYSM",
-      "Enable": true
+      "Enable": "0"
     }
   ],
   "projectFileDirUrl": "file:\/\/\/Users\/niyongsheng\/Desktop\/EasyRelease\/EasyRelease.xcodeproj",
@@ -53,7 +53,7 @@ brew install imagemagick
   "ignoreArray": [
     {
       "name": "Pods",
-      "enable": true
+      "enable": "1"
     }
   ],
   "projectOldName": "EasyRelease",
