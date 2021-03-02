@@ -71,10 +71,10 @@
                     <rect key="frame" x="20" y="20" width="733" height="150"/>
                     <subviews>
                         <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="v8v-w8-3A8">
-                            <rect key="frame" x="573" y="39" width="70" height="32"/>
+                            <rect key="frame" x="563" y="79" width="80" height="32"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="30" id="d1d-RW-Vq3"/>
-                                <constraint firstAttribute="width" constant="70" id="jWm-2N-jvl"/>
+                                <constraint firstAttribute="width" constant="80" id="jWm-2N-jvl"/>
                             </constraints>
                             <buttonCell key="cell" type="smallSquare" title="Action" bezelStyle="smallSquare" alignment="center" borderStyle="border" inset="2" id="CB1-Yy-LAQ">
                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -85,7 +85,7 @@
                             </connections>
                         </button>
                         <button horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Yi5-Zk-W3s">
-                            <rect key="frame" x="661" y="41" width="24" height="24"/>
+                            <rect key="frame" x="661" y="81" width="24" height="24"/>
                             <constraints>
                                 <constraint firstAttribute="width" secondItem="Yi5-Zk-W3s" secondAttribute="height" multiplier="1:1" id="cI0-VA-ZNp"/>
                                 <constraint firstAttribute="width" constant="20" id="ceg-5b-BEQ"/>
@@ -123,26 +123,43 @@
                             </connections>
                         </button>
                         <pathControl verticalHuggingPriority="750" allowsExpansionToolTips="YES" translatesAutoresizingMaskIntoConstraints="NO" id="e1Q-jo-Iev">
-                            <rect key="frame" x="85" y="84" width="448" height="22"/>
+                            <rect key="frame" x="85" y="84" width="438" height="22"/>
                             <pathCell key="cell" selectable="YES" editable="YES" alignment="left" id="5CW-LW-8Jp">
                                 <font key="font" metaFont="system"/>
                                 <url key="url" string="file:///"/>
                             </pathCell>
                         </pathControl>
                         <pathControl verticalHuggingPriority="750" allowsExpansionToolTips="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vur-k7-Pdf">
-                            <rect key="frame" x="85" y="44" width="448" height="22"/>
+                            <rect key="frame" x="85" y="44" width="438" height="22"/>
                             <pathCell key="cell" selectable="YES" editable="YES" alignment="left" id="9ne-OT-7rs">
                                 <font key="font" metaFont="system"/>
                                 <url key="url" string="file:///"/>
                             </pathCell>
                         </pathControl>
+                        <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="YZx-Oh-IKF">
+                            <rect key="frame" x="563" y="29" width="80" height="32"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="30" id="DJF-1l-glz"/>
+                                <constraint firstAttribute="width" constant="80" id="Q44-rV-Yv4"/>
+                            </constraints>
+                            <buttonCell key="cell" type="smallSquare" title="pod install" bezelStyle="smallSquare" alignment="center" borderStyle="border" inset="2" id="uqy-DL-7bd">
+                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                <font key="font" metaFont="system"/>
+                            </buttonCell>
+                            <connections>
+                                <action selector="podInstall:" target="-2" id="aNH-c4-6ao"/>
+                            </connections>
+                        </button>
                     </subviews>
                     <constraints>
                         <constraint firstItem="Yi5-Zk-W3s" firstAttribute="leading" secondItem="v8v-w8-3A8" secondAttribute="trailing" constant="20" id="3O9-p6-Yll"/>
                         <constraint firstAttribute="trailing" secondItem="Yi5-Zk-W3s" secondAttribute="trailing" constant="50" id="3h9-Vr-eXa"/>
                         <constraint firstItem="wc8-na-bCV" firstAttribute="width" secondItem="isX-hf-mAi" secondAttribute="width" id="Ejs-bV-66e"/>
-                        <constraint firstItem="v8v-w8-3A8" firstAttribute="centerY" secondItem="yI4-fT-gZ7" secondAttribute="centerY" constant="20" id="Hor-pG-euT"/>
+                        <constraint firstItem="v8v-w8-3A8" firstAttribute="centerY" secondItem="yI4-fT-gZ7" secondAttribute="centerY" constant="-20" id="Hor-pG-euT"/>
                         <constraint firstItem="wc8-na-bCV" firstAttribute="centerY" secondItem="yI4-fT-gZ7" secondAttribute="centerY" constant="20" id="JJl-ig-x9o"/>
+                        <constraint firstItem="YZx-Oh-IKF" firstAttribute="centerX" secondItem="v8v-w8-3A8" secondAttribute="centerX" id="JYM-0n-qPA"/>
+                        <constraint firstItem="YZx-Oh-IKF" firstAttribute="top" secondItem="v8v-w8-3A8" secondAttribute="bottom" constant="20" id="L7D-9M-Ife"/>
+                        <constraint firstItem="YZx-Oh-IKF" firstAttribute="leading" secondItem="v8v-w8-3A8" secondAttribute="leading" id="Qvc-vk-x0l"/>
                         <constraint firstItem="vur-k7-Pdf" firstAttribute="centerY" secondItem="yI4-fT-gZ7" secondAttribute="centerY" constant="20" id="T06-7a-T5u"/>
                         <constraint firstItem="vur-k7-Pdf" firstAttribute="width" secondItem="e1Q-jo-Iev" secondAttribute="width" id="V62-Iz-Tmp"/>
                         <constraint firstItem="isX-hf-mAi" firstAttribute="centerY" secondItem="yI4-fT-gZ7" secondAttribute="centerY" constant="-20" id="cJj-ww-Ydi"/>
@@ -154,7 +171,7 @@
                         <constraint firstAttribute="height" constant="150" id="nLh-Dg-zNn"/>
                         <constraint firstItem="vur-k7-Pdf" firstAttribute="leading" secondItem="e1Q-jo-Iev" secondAttribute="leading" id="nUj-yb-dAG"/>
                         <constraint firstItem="e1Q-jo-Iev" firstAttribute="centerY" secondItem="yI4-fT-gZ7" secondAttribute="centerY" constant="-20" id="r3t-Lg-8od"/>
-                        <constraint firstItem="Yi5-Zk-W3s" firstAttribute="centerY" secondItem="yI4-fT-gZ7" secondAttribute="centerY" constant="20" id="z4s-Kz-EuH"/>
+                        <constraint firstItem="Yi5-Zk-W3s" firstAttribute="centerY" secondItem="yI4-fT-gZ7" secondAttribute="centerY" constant="-20" id="z4s-Kz-EuH"/>
                     </constraints>
                 </customView>
             </subviews>

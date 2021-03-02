@@ -26,6 +26,7 @@
 		C8212F8725E486FF00777EDB /* NYSConfigManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C8212F8625E486FF00777EDB /* NYSConfigManager.m */; };
 		C82C207625EE67300065F9D4 /* GitHubUpdates.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C82C207525EE672F0065F9D4 /* GitHubUpdates.framework */; };
 		C82C207725EE67510065F9D4 /* GitHubUpdates.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = C82C207525EE672F0065F9D4 /* GitHubUpdates.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		C82C207C25EE81500065F9D4 /* podInstall.sh in Resources */ = {isa = PBXBuildFile; fileRef = C82C207B25EE81500065F9D4 /* podInstall.sh */; };
 		C82E0A1325CD500400FCB4F3 /* NullSafe.m in Sources */ = {isa = PBXBuildFile; fileRef = C82E0A1225CD500300FCB4F3 /* NullSafe.m */; };
 		C82E0B7F25CE766C00FCB4F3 /* NYSTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = C82E0B7E25CE766C00FCB4F3 /* NYSTool.swift */; };
 		C86560E925CBF16D009CC8DE /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C86560E825CBF16D009CC8DE /* AppDelegate.m */; };
@@ -105,6 +106,7 @@
 		C8212F8525E486FF00777EDB /* NYSConfigManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NYSConfigManager.h; sourceTree = "<group>"; };
 		C8212F8625E486FF00777EDB /* NYSConfigManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NYSConfigManager.m; sourceTree = "<group>"; };
 		C82C207525EE672F0065F9D4 /* GitHubUpdates.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GitHubUpdates.framework; sourceTree = "<group>"; };
+		C82C207B25EE81500065F9D4 /* podInstall.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = podInstall.sh; sourceTree = "<group>"; };
 		C82E09DA25CD3CCC00FCB4F3 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		C82E0A1225CD500300FCB4F3 /* NullSafe.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NullSafe.m; sourceTree = "<group>"; };
 		C82E0A1525CD5B7700FCB4F3 /* EasyRelease-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "EasyRelease-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -396,6 +398,7 @@
 				C81B0EA025E4F7DF0067CA1A /* NYSAction.m */,
 				C81B0F0725E624000067CA1A /* logo_str.erc */,
 				C81B0F8925E76AF80067CA1A /* rehash.sh */,
+				C82C207B25EE81500065F9D4 /* podInstall.sh */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -482,6 +485,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C82C207C25EE81500065F9D4 /* podInstall.sh in Resources */,
 				C8ED272025DF820800AAA6D0 /* NYSProjectImportVC.xib in Resources */,
 				C81B0F8A25E76AF80067CA1A /* rehash.sh in Resources */,
 				C86561AD25CCE830009CC8DE /* MainWindow.xib in Resources */,
@@ -694,7 +698,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MARKETING_VERSION = 1.2;
+				MARKETING_VERSION = 1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.nys.EasyRelease;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_INSTALL_OBJC_HEADER = YES;
@@ -729,7 +733,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MARKETING_VERSION = 1.2;
+				MARKETING_VERSION = 1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.nys.EasyRelease;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_INSTALL_OBJC_HEADER = YES;

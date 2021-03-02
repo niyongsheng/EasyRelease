@@ -178,6 +178,10 @@
     }
 }
 
+- (IBAction)podInstall:(NSButton *)sender {
+    
+}
+
 - (IBAction)tip:(NSButton *)sender {
     [self.showTipPopover showRelativeToRect:sender.bounds ofView:sender preferredEdge:NSRectEdgeMinY];
 }

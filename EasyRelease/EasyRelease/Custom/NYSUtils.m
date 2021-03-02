@@ -74,6 +74,7 @@
     return resultStr;
 }
 
+/// 提取字符串中的大写字母
 + (NSString *)getCapitalString:(NSString *)str {
     NSInteger alength = [str length];
     NSMutableString *resultStr = [[NSMutableString alloc] init];
@@ -82,6 +83,9 @@
         if ((commitChar>64) && (commitChar<91)) {
             [resultStr appendString:[str substringWithRange:NSMakeRange(i, 1)]];
         }
+    }
+    if (resultStr.length == 0) {
+        [resultStr appendString:@"ER"];
     }
     return resultStr;
 }
