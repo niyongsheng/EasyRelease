@@ -58,16 +58,32 @@
     return NO;
 }
 
+/// 生成首字母大写的指定长度随机字符串
 + (NSString *)generateRandomString:(int)lenght {
     NSString *sourceStr = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
     NSMutableString *resultStr = [[NSMutableString alloc] init];
     for (int i = 0; i < lenght; i++) {
         unsigned index = rand() % [sourceStr length];
         NSString *oneStr = [sourceStr substringWithRange:NSMakeRange(index, 1)];
+        while (([sourceStr characterAtIndex:index] > 96) && ([sourceStr characterAtIndex:index] < 123) && (i==0)) {
+            index = rand() % [sourceStr length];
+            oneStr = [sourceStr substringWithRange:NSMakeRange(index, 1)];
+        }
         [resultStr appendString:oneStr];
     }
     return resultStr;
 }
 
++ (NSString *)getCapitalString:(NSString *)str {
+    NSInteger alength = [str length];
+    NSMutableString *resultStr = [[NSMutableString alloc] init];
+    for (int i = 0; i<alength; i++) {
+        char commitChar = [str characterAtIndex:i];
+        if ((commitChar>64) && (commitChar<91)) {
+            [resultStr appendString:[str substringWithRange:NSMakeRange(i, 1)]];
+        }
+    }
+    return resultStr;
+}
 
 @end

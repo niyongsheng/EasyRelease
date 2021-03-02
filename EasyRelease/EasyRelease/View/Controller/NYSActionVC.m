@@ -78,11 +78,14 @@
                 
                 if (model.isAuto) {
                     NSString *prefixStr = [NYSUtils generateRandomString:4];
+                    NSString *capitalStr = [NYSUtils getCapitalString:prefixStr];
                     if ([NYSUtils blankString:model.projectNewName] && [NYSUtils blankString:model.projectOldName]) {
                         model.projectOldName = pnStr;
                         model.projectNewName = [NSString stringWithFormat:@"%@_%@", prefixStr, pnStr];
                     } else if ([NYSUtils blankString:model.projectNewName] && ![NYSUtils blankString:model.projectOldName]) {
                         model.projectNewName = [NSString stringWithFormat:@"%@_%@", prefixStr, model.projectOldName];
+                    } else if (![NYSUtils blankString:model.projectNewName] && [NYSUtils blankString:model.projectOldName]) {
+                        model.projectOldName = pnStr;
                     }
                     
                     for (int i = 0; i < model.replaceArray.count; i++) {

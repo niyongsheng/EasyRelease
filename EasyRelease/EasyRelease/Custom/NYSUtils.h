@@ -20,6 +20,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (NSString *)generateRandomString:(int)lenght;
 
++ (NSString *)getCapitalString:(NSString *)str;
+
 @end
 
 NS_ASSUME_NONNULL_END
