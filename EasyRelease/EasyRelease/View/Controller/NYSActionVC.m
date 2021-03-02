@@ -157,9 +157,10 @@
         return;
     }
     
-    [sender setEnabled:NO];
     // action change...
     @try {
+        [sender setEnabled:NO];
+        
         NYSAction *action = [[NYSAction alloc] initWithConfig:NConfig];
         [action action];
         [ArtProgressHUD showSuccessText:@"ER Finish"];

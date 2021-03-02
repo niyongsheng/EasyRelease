@@ -112,7 +112,7 @@ NSTableViewDataSource
         comboBox.stringValue = (NSString *)value;
     } else {
         NSButton *checkBoxButton = [contentView subviews][0];
-        checkBoxButton.state = (BOOL)value;
+        [checkBoxButton setState:[(NSString *)value integerValue]];
     }
     
     return contentView;
