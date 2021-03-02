@@ -68,17 +68,20 @@
             NYSConfigModel *model = [NYSConfigModel yy_modelWithJSON:str];
             if (model.isSasS) { // SasS环境下自动配置
                 NSString *pnStr = url.path.lastPathComponent.stringByDeletingPathExtension;
-                NSString *pPath = url.absoluteString.stringByDeletingLastPathComponent;
+                NSString *pPath = url.path.stringByDeletingLastPathComponent;
                 if ([NYSUtils blankString:model.projectFileDirUrl.absoluteString]) {
                     model.projectFileDirUrl = [NSURL URLWithString:[pPath stringByAppendingFormat:@"/%@.xcodeproj", pnStr]];
                 }
                 if ([NYSUtils blankString:model.projectDirUrl.absoluteString]) {
-                    model.projectDirUrl = [NSURL URLWithString:[pPath stringByAppendingFormat:@"/%@", pnStr]];
+                    model.projectDirUrl = [NSURL URLWithString:[pPath stringByAppendingPathComponent:pnStr]];
                 }
                 
                 if (model.isAuto) {
                     NSString *prefixStr = [NYSUtils generateRandomString:4];
                     NSString *capitalStr = [NYSUtils getCapitalString:prefixStr];
+                    if (![NYSUtils blankString:model.projectNewName]) {
+                        capitalStr = [NYSUtils getCapitalString:model.projectNewName];
+                    }
                     if ([NYSUtils blankString:model.projectNewName] && [NYSUtils blankString:model.projectOldName]) {
                         model.projectOldName = pnStr;
                         model.projectNewName = [NSString stringWithFormat:@"%@_%@", prefixStr, pnStr];
@@ -92,7 +95,7 @@
                         NSDictionary *replaceDict = model.replaceArray[i];
                         if ([NYSUtils blankString:replaceDict[@"NewPrefix"]] && ![NYSUtils blankString:replaceDict[@"OldPrefix"]]) {
                             NSMutableDictionary *mutableReplaceDict = [NSMutableDictionary dictionaryWithDictionary:replaceDict];
-                            NSString *newValue = [NSString stringWithFormat:@"%@_%@", prefixStr, replaceDict[@"OldPrefix"]];
+                            NSString *newValue = [NSString stringWithFormat:@"%@_%@", capitalStr, replaceDict[@"OldPrefix"]];
                             [mutableReplaceDict setValue:newValue forKey:@"NewPrefix"];
                             model.replaceArray[i] = mutableReplaceDict;
                         }

@@ -24,6 +24,8 @@
 		C81B0F6125E6470E0067CA1A /* NYSShowTipViewControlle.xib in Resources */ = {isa = PBXBuildFile; fileRef = C81B0F5F25E6470E0067CA1A /* NYSShowTipViewControlle.xib */; };
 		C81B0F8A25E76AF80067CA1A /* rehash.sh in Resources */ = {isa = PBXBuildFile; fileRef = C81B0F8925E76AF80067CA1A /* rehash.sh */; };
 		C8212F8725E486FF00777EDB /* NYSConfigManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C8212F8625E486FF00777EDB /* NYSConfigManager.m */; };
+		C82C207625EE67300065F9D4 /* GitHubUpdates.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C82C207525EE672F0065F9D4 /* GitHubUpdates.framework */; };
+		C82C207725EE67510065F9D4 /* GitHubUpdates.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = C82C207525EE672F0065F9D4 /* GitHubUpdates.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		C82E0A1325CD500400FCB4F3 /* NullSafe.m in Sources */ = {isa = PBXBuildFile; fileRef = C82E0A1225CD500300FCB4F3 /* NullSafe.m */; };
 		C82E0B7F25CE766C00FCB4F3 /* NYSTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = C82E0B7E25CE766C00FCB4F3 /* NYSTool.swift */; };
 		C86560E925CBF16D009CC8DE /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C86560E825CBF16D009CC8DE /* AppDelegate.m */; };
@@ -51,8 +53,6 @@
 		C86561F325CCE830009CC8DE /* NYSRoundImageButton.m in Sources */ = {isa = PBXBuildFile; fileRef = C865619825CCE830009CC8DE /* NYSRoundImageButton.m */; };
 		C86561F425CCE830009CC8DE /* NYSTextButton.m in Sources */ = {isa = PBXBuildFile; fileRef = C865619C25CCE830009CC8DE /* NYSTextButton.m */; };
 		C86561F825CCE830009CC8DE /* NSColor+RGBValue.m in Sources */ = {isa = PBXBuildFile; fileRef = C86561A625CCE830009CC8DE /* NSColor+RGBValue.m */; };
-		C8B67ABB25ECB2E300EF9A39 /* GitHubUpdates.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C8B67ABA25ECB2E200EF9A39 /* GitHubUpdates.framework */; };
-		C8B67ABE25ECB31D00EF9A39 /* GitHubUpdates.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = C8B67ABA25ECB2E200EF9A39 /* GitHubUpdates.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		C8ED271F25DF820800AAA6D0 /* NYSProjectImportVC.m in Sources */ = {isa = PBXBuildFile; fileRef = C8ED271D25DF820800AAA6D0 /* NYSProjectImportVC.m */; };
 		C8ED272025DF820800AAA6D0 /* NYSProjectImportVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = C8ED271E25DF820800AAA6D0 /* NYSProjectImportVC.xib */; };
 		C8ED272C25DFA1C300AAA6D0 /* NYSModificationVC.m in Sources */ = {isa = PBXBuildFile; fileRef = C8ED272A25DFA1C300AAA6D0 /* NYSModificationVC.m */; };
@@ -70,7 +70,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				C8B67ABE25ECB31D00EF9A39 /* GitHubUpdates.framework in CopyFiles */,
+				C82C207725EE67510065F9D4 /* GitHubUpdates.framework in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -104,6 +104,7 @@
 		C81B0F8925E76AF80067CA1A /* rehash.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = rehash.sh; sourceTree = "<group>"; };
 		C8212F8525E486FF00777EDB /* NYSConfigManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NYSConfigManager.h; sourceTree = "<group>"; };
 		C8212F8625E486FF00777EDB /* NYSConfigManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NYSConfigManager.m; sourceTree = "<group>"; };
+		C82C207525EE672F0065F9D4 /* GitHubUpdates.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GitHubUpdates.framework; sourceTree = "<group>"; };
 		C82E09DA25CD3CCC00FCB4F3 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		C82E0A1225CD500300FCB4F3 /* NullSafe.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NullSafe.m; sourceTree = "<group>"; };
 		C82E0A1525CD5B7700FCB4F3 /* EasyRelease-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "EasyRelease-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -158,7 +159,6 @@
 		C865619C25CCE830009CC8DE /* NYSTextButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NYSTextButton.m; sourceTree = "<group>"; };
 		C86561A525CCE830009CC8DE /* NSColor+RGBValue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSColor+RGBValue.h"; sourceTree = "<group>"; };
 		C86561A625CCE830009CC8DE /* NSColor+RGBValue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSColor+RGBValue.m"; sourceTree = "<group>"; };
-		C8B67ABA25ECB2E200EF9A39 /* GitHubUpdates.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GitHubUpdates.framework; path = "../../../../../Library/Developer/Xcode/DerivedData/GitHubUpdates-debfpwgataftlzbjpdveysldqoqp/Build/Products/Debug/GitHubUpdates.framework"; sourceTree = "<group>"; };
 		C8ED271C25DF820800AAA6D0 /* NYSProjectImportVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NYSProjectImportVC.h; sourceTree = "<group>"; };
 		C8ED271D25DF820800AAA6D0 /* NYSProjectImportVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NYSProjectImportVC.m; sourceTree = "<group>"; };
 		C8ED271E25DF820800AAA6D0 /* NYSProjectImportVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NYSProjectImportVC.xib; sourceTree = "<group>"; };
@@ -178,7 +178,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C8B67ABB25ECB2E300EF9A39 /* GitHubUpdates.framework in Frameworks */,
+				C82C207625EE67300065F9D4 /* GitHubUpdates.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -337,7 +337,7 @@
 		C865618925CCE830009CC8DE /* Custom */ = {
 			isa = PBXGroup;
 			children = (
-				C8B67ABA25ECB2E200EF9A39 /* GitHubUpdates.framework */,
+				C82C207525EE672F0065F9D4 /* GitHubUpdates.framework */,
 				C81B0E9525E4E12F0067CA1A /* YYModel */,
 				C80DF3E525E384A600DC36EC /* ArtProgressHUD */,
 				C865618A25CCE830009CC8DE /* Controls */,
