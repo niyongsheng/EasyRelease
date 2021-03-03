@@ -83,8 +83,8 @@ static void easyReleaseDono() {
     // 1.2修改图片hash
     if (NConfig.isRehashImages) {
         @autoreleasepool {
-            handleXcassetsFiles(NConfig.projectDirUrl.path);
             NPostNotification(@"Modifying the resource file...");
+            handleXcassetsFiles(NConfig.projectDirUrl.path);
         }
         NPostNotification(@"Modification of the resource file is completed");
     }
@@ -158,6 +158,15 @@ static void easyReleaseDono() {
         NPostNotification(@"Modification of project name completed\n");
     }
     
+    // 3.2pod install
+    if (NConfig.isAutoPodInstall) {
+        @autoreleasepool {
+            NPostNotification(@"Installing third framework...");
+            podInstall(NConfig.projectFileDirUrl.path.stringByDeletingLastPathComponent);
+        }
+        NPostNotification(@"Install third framework is completed");
+    }
+    
     easyReleaseDono();
 }
 
@@ -207,6 +216,57 @@ void handleXcassetsFiles(NSString *directory) {
             [handle waitForDataInBackgroundAndNotify];
         } else {
             NPostNotification(@"\nImage files rehash completed.\n");
+        }
+    }];
+    
+    [task waitUntilExit];
+}
+
+#pragma mark - pod install
+void podInstall(NSString *directory) {
+    NSLog(@"Pod install dir :%@", directory);
+    NSFileManager *fm = [NSFileManager defaultManager];
+    BOOL isDirectory;
+    [fm fileExistsAtPath:directory isDirectory:&isDirectory];
+    if (!isDirectory) {
+        NSString *info = [NSString stringWithFormat:@"\nPod install path is not exists at path:%@\n", directory];
+        NPostNotification(info);
+        return;
+    }
+    
+    NSTask *task = [[NSTask alloc] init];
+    NSPipe *pipe = [NSPipe pipe];
+    [task setStandardOutput:pipe];
+    [task setStandardError:pipe];
+    [task setLaunchPath:@"/bin/sh"];
+    NSString *path = [[NSBundle mainBundle] pathForResource:@"podInstall" ofType:@"sh"];
+    [task setArguments:[NSArray arrayWithObjects:path, directory, nil]];
+    
+    [task launch];
+
+    NSFileHandle *handle = [pipe fileHandleForReading];
+    [handle waitForDataInBackgroundAndNotify];
+    
+    __block NSInteger blankCount = 0;
+    [[NSNotificationCenter defaultCenter] addObserverForName:NSFileHandleDataAvailableNotification
+                                                      object:handle
+                                                       queue:nil
+                                                  usingBlock:^(NSNotification* notification) {
+        NSData *data = [handle availableData];
+        NSString *result = [[NSString alloc] initWithData:data encoding: NSUTF8StringEncoding];
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            NPostNotification(result);
+        });
+        
+        if ([NYSUtils blankString:result]) {
+            blankCount++;
+        }
+        
+        if (blankCount < 5) {
+            [handle waitForDataInBackgroundAndNotify];
+        } else {
+            NPostNotification(@"\nPod Install Done.\n\nNow you can try opening this new project file.\n\nGOOD LUCK ^^\n");
         }
     }];
     

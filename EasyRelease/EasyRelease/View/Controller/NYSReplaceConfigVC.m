@@ -110,12 +110,34 @@ NSTableViewDataSource
     } else if ([key isEqualToString:@"Type"]) {
         NSComboBox *comboBox = [contentView subviews][0];
         comboBox.stringValue = (NSString *)value;
+        
+        [comboBox setTag:row];
+        [comboBox setAction:@selector(comboBoxChanged:)];
     } else {
         NSButton *checkBoxButton = [contentView subviews][0];
         [checkBoxButton setState:[(NSString *)value integerValue]];
+        
+        [checkBoxButton setTag:row];
+        [checkBoxButton setAction:@selector(checkButtonClick:)];
     }
     
     return contentView;
+}
+
+- (void)checkButtonClick:(NSButton *)sender {
+    NSDictionary *rowInfoDic = NConfig.replaceArray[sender.tag];
+    NSMutableDictionary *mutableReplaceDict = [NSMutableDictionary dictionaryWithDictionary:rowInfoDic];
+    NSString *newValue = sender.state ? @"1" : @"0";
+    [mutableReplaceDict setValue:newValue forKey:@"Enable"];
+    NConfig.replaceArray[sender.tag] = mutableReplaceDict;
+}
+
+- (void)comboBoxChanged:(NSComboBox *)sender {
+    NSDictionary *rowInfoDic = NConfig.replaceArray[sender.tag];
+    NSMutableDictionary *mutableReplaceDict = [NSMutableDictionary dictionaryWithDictionary:rowInfoDic];
+    NSString *newValue = sender.stringValue;
+    [mutableReplaceDict setValue:newValue forKey:@"Type"];
+    NConfig.replaceArray[sender.tag] = mutableReplaceDict;
 }
 
 - (void)RefreshConfigUINotificationHandler:(NSNotification *)notification {

@@ -64,6 +64,28 @@
     }
 }
 
+- (IBAction)podInstallSwitched:(NSSwitch *)sender {
+    if (sender.state == YES) {
+        
+        NSAlert *alert = [[NSAlert alloc] init];
+        [alert addButtonWithTitle:@"Installed"];
+        [alert addButtonWithTitle:@"Uninstall"];
+        [alert setIcon:[NSImage imageNamed:@"terminal"]];
+        [alert setMessageText:@"Install CocoaPods"];
+        [alert setInformativeText:@"https://github.com/niyongsheng/EasyRelease/blob/master/README.md#CocoaPods"];
+        [alert setAlertStyle:NSAlertStyleInformational];
+        [alert beginSheetModalForWindow:[self.view window] completionHandler:^(NSModalResponse returnCode) {
+            if (returnCode == NSAlertFirstButtonReturn) {
+                NConfig.isAutoPodInstall = sender.state;
+            } else if (returnCode == NSAlertSecondButtonReturn) {
+                sender.state = NO;
+                NSLog(@"onclicked uninstall");
+            }
+        }];
+    } else {
+        NConfig.isAutoPodInstall = sender.state;
+    }
+}
 
 - (void)contextDidChange:(NSNotification *)notification {
     if (notification.object == _nameOldTextField) {

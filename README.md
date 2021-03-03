@@ -27,11 +27,19 @@ EasyRelease
 brew install imagemagick
 ```
 
+## CocoaPods
+```shell
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+
+brew install cocoapods
+```
+
 ## Config
 ```json
 {
   "isSasS": false,
   "isAuto": false,
+  "isAutoPodInstall": false,
   "isRehashImages": false,
   "isDelAnnotation": true,
   "replaceArray": [

@@ -1,0 +1,31 @@
+{
+  "isSasS": false,
+  "isAuto": false,
+  "isAutoPodInstall": false,
+  "isRehashImages": false,
+  "isDelAnnotation": true,
+  "replaceArray": [
+    {
+      "Type": "class",
+      "OldPrefix": "NYS",
+      "NewPrefix": "NYSC",
+      "Enable": "1"
+    },
+    {
+      "Type": "method",
+      "OldPrefix": "NYS",
+      "NewPrefix": "NYSM",
+      "Enable": "0"
+    }
+  ],
+  "projectFileDirUrl": "file:\/\/\/Users\/niyongsheng\/Desktop\/EasyRelease\/EasyRelease.xcodeproj",
+  "projectDirUrl": "file:\/\/\/Users\/niyongsheng\/Desktop\/EasyRelease\/EasyRelease\/",
+  "ignoreArray": [
+    {
+      "name": "Pods",
+      "enable": "1"
+    }
+  ],
+  "projectOldName": "EasyRelease",
+  "projectNewName": "EasyReleaseNew"
+}

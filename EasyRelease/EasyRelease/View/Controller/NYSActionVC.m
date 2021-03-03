@@ -11,8 +11,9 @@
 #import "NYSConfigModel.h"
 #import "NYSAction.h"
 #import "NYSShowTipViewControlle.h"
+#import "NYSPanelWindow.h"
 
-@interface NYSActionVC ()
+@interface NYSActionVC () <NSWindowDelegate>
 {
     NSString *tempStr;
     NSPipe *outputPipe;
@@ -23,6 +24,7 @@
 @property (weak) IBOutlet NSPathControl *downloadPathControl;
 @property (unsafe_unretained) IBOutlet NSTextView *actionInfoTextView;
 
+@property (nonatomic, strong) NYSPanelWindow *panelWindow;
 @property (nonatomic, strong) NSPopover *showTipPopover;
 
 @end
@@ -35,6 +37,26 @@
         _showTipPopover.behavior = NSPopoverBehaviorSemitransient;
     }
     return _showTipPopover;
+}
+
+- (NYSPanelWindow *)panelWindow {
+    if (!_panelWindow) {
+        NSNib *nib = [[NSNib alloc] initWithNibNamed:@"NYSPanelWindow" bundle:nil];
+        NSArray *objects;
+        if ([nib instantiateWithOwner:self topLevelObjects:&objects]) {
+            for (id obj in objects) {
+                if ([obj isKindOfClass:[NYSPanelWindow class]]) {
+                    _panelWindow = obj;
+                    break;
+                }
+            }
+        }
+        [_panelWindow center];
+        _panelWindow.title = @"Config";
+        _panelWindow.restorable = NO;
+        _panelWindow.delegate = self;
+    }
+    return _panelWindow;
 }
 
 - (void)viewDidLoad {
@@ -66,16 +88,17 @@
         NSString *str = [[NSString alloc] initWithData:[[NSData alloc] initWithContentsOfURL:url] encoding:NSUTF8StringEncoding];
         if ([NConfig yy_modelSetWithJSON:str]) {
             NYSConfigModel *model = [NYSConfigModel yy_modelWithJSON:str];
+            
+            NSString *pnStr = url.path.lastPathComponent.stringByDeletingPathExtension;
+            NSString *pPath = url.path.stringByDeletingLastPathComponent;
+            if ([NYSUtils blankString:model.projectFileDirUrl.absoluteString]) {
+                model.projectFileDirUrl = [NSURL URLWithString:[pPath stringByAppendingFormat:@"/%@.xcodeproj", pnStr]];
+            }
+            if ([NYSUtils blankString:model.projectDirUrl.absoluteString]) {
+                model.projectDirUrl = [NSURL URLWithString:[pPath stringByAppendingPathComponent:pnStr]];
+            }
+
             if (model.isSasS) { // SasS环境下自动配置
-                NSString *pnStr = url.path.lastPathComponent.stringByDeletingPathExtension;
-                NSString *pPath = url.path.stringByDeletingLastPathComponent;
-                if ([NYSUtils blankString:model.projectFileDirUrl.absoluteString]) {
-                    model.projectFileDirUrl = [NSURL URLWithString:[pPath stringByAppendingFormat:@"/%@.xcodeproj", pnStr]];
-                }
-                if ([NYSUtils blankString:model.projectDirUrl.absoluteString]) {
-                    model.projectDirUrl = [NSURL URLWithString:[pPath stringByAppendingPathComponent:pnStr]];
-                }
-                
                 if (model.isAuto) {
                     NSString *prefixStr = [NYSUtils generateRandomString:4];
                     NSString *capitalStr = [NYSUtils getCapitalString:prefixStr];
@@ -101,8 +124,9 @@
                         }
                     }
                 } else {
-                    // TODO手动配置
-                    
+                    // 手动配置
+                    self.panelWindow.oldProjectName = pnStr;
+                    [self.panelWindow makeKeyAndOrderFront:self];
                 }
             }
             NConfig = model;
@@ -176,10 +200,6 @@
     } @finally {
         [sender setEnabled:YES];
     }
-}
-
-- (IBAction)podInstall:(NSButton *)sender {
-    
 }
 
 - (IBAction)tip:(NSButton *)sender {
