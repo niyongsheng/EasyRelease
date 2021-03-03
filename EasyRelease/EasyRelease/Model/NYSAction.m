@@ -137,8 +137,10 @@ static void easyReleaseDono() {
                 NSString *objPrefix = [NSString stringWithFormat:@"Begin modifying the method name prefix. %s > %s\n", oldMethodNamePrefix.UTF8String, newMethodNamePrefix.UTF8String];
                 NPostNotification(objPrefix);
                 @autoreleasepool {
-                    NPostNotification(@"Replacing method name prefixes\n");
-                    changePrefix(NConfig.projectDirUrl.path, ignoreDirNames, oldMethodNamePrefix, newMethodNamePrefix);
+                    // 内部替换
+                    NPostNotification(@"Replacing name prefixes\n");
+//                    changePrefix(NConfig.projectDirUrl.path, ignoreDirNames, oldMethodNamePrefix, newMethodNamePrefix);
+                    changePrefix(NConfig.projectDirUrl.path, [NSMutableArray array], oldMethodNamePrefix, newMethodNamePrefix);
                     
                     NSString *objPrefix = [NSString stringWithFormat:@"Modifying the method name prefix is complete. %s > %s\n", oldMethodNamePrefix.UTF8String, newMethodNamePrefix.UTF8String];
                     NPostNotification(objPrefix);
