@@ -13,6 +13,7 @@
 @property (weak) IBOutlet NSTextField *nameNewTextField;
 @property (weak) IBOutlet NSSwitch *delAnnotationSwitch;
 @property (weak) IBOutlet NSSwitch *rehashImgSwitch;
+@property (weak) IBOutlet NSSwitch *podInstallSwitch;
 @end
 
 @implementation NYSModificationVC
@@ -104,6 +105,7 @@
 - (void)RefreshConfigUINotificationHandler:(NSNotification *)notification {
     self.delAnnotationSwitch.state = NConfig.isDelAnnotation;
     self.rehashImgSwitch.state = NConfig.isRehashImages;
+    self.podInstallSwitch.state = NConfig.isAutoPodInstall;
     
     self.nameOldTextField.stringValue = NConfig.projectOldName;
     self.nameNewTextField.stringValue = NConfig.projectNewName;

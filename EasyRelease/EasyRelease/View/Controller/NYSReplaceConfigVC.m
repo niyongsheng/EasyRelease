@@ -130,6 +130,7 @@ NSTableViewDataSource
     NSString *newValue = sender.state ? @"1" : @"0";
     [mutableReplaceDict setValue:newValue forKey:@"Enable"];
     NConfig.replaceArray[sender.tag] = mutableReplaceDict;
+    [ArtProgressHUD showInfoText:@"updated"];
 }
 
 - (void)comboBoxChanged:(NSComboBox *)sender {
@@ -138,6 +139,7 @@ NSTableViewDataSource
     NSString *newValue = sender.stringValue;
     [mutableReplaceDict setValue:newValue forKey:@"Type"];
     NConfig.replaceArray[sender.tag] = mutableReplaceDict;
+    [ArtProgressHUD showInfoText:@"updated"];
 }
 
 - (void)RefreshConfigUINotificationHandler:(NSNotification *)notification {

@@ -119,6 +119,9 @@
                         if ([NYSUtils blankString:replaceDict[@"NewPrefix"]] && ![NYSUtils blankString:replaceDict[@"OldPrefix"]]) {
                             NSMutableDictionary *mutableReplaceDict = [NSMutableDictionary dictionaryWithDictionary:replaceDict];
                             NSString *newValue = [NSString stringWithFormat:@"%@_%@", capitalStr, replaceDict[@"OldPrefix"]];
+                            if ([replaceDict[@"Type"] isEqual:@"global"]) {
+                                newValue = [NSString stringWithFormat:@"%@_", capitalStr];
+                            }
                             [mutableReplaceDict setValue:newValue forKey:@"NewPrefix"];
                             model.replaceArray[i] = mutableReplaceDict;
                         }
@@ -167,7 +170,7 @@
             chooseFile = [[sPanel URL] path];
             self->_downloadPathControl.URL = [sPanel URL];
             NSData *data = [NConfig yy_modelToJSONData];
-            [data writeToFile:chooseFile atomically:true];
+            [data writeToFile:chooseFile atomically:YES];
             [ArtProgressHUD showSuccessText:@"save success"];
             NSLog(@"Click OK Choose files : %@",chooseFile);
         } else if (result == NSModalResponseCancel)
@@ -184,6 +187,19 @@
     
     if ([NYSUtils blankString:NConfig.projectDirUrl.path]) {
         [NYSUtils showAlertPanel:@"Missing project Directory parameter" forWindow:self.view.window completionHandler:nil];
+        return;
+    }
+    
+    NSFileManager *fm = [NSFileManager defaultManager];
+    if (![fm fileExistsAtPath:NConfig.projectFileDirUrl.path]) {
+        [NYSUtils showAlertPanel:@"Project file inexistence" forWindow:self.view.window completionHandler:nil];
+        return;
+    }
+    
+    BOOL isDirectory = NO;
+    [fm fileExistsAtPath:NConfig.projectDirUrl.path isDirectory:&isDirectory];
+    if (!isDirectory) {
+        [NYSUtils showAlertPanel:@"Project directory inexistence" forWindow:self.view.window completionHandler:nil];
         return;
     }
     

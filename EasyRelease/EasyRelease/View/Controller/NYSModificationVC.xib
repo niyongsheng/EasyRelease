@@ -11,6 +11,7 @@
                 <outlet property="delAnnotationSwitch" destination="X5K-U8-F8u" id="dq8-Br-mvI"/>
                 <outlet property="nameNewTextField" destination="mgN-Ry-ILS" id="hat-GL-kir"/>
                 <outlet property="nameOldTextField" destination="hki-jy-lxQ" id="Qs6-sH-bXc"/>
+                <outlet property="podInstallSwitch" destination="sNm-O2-FW0" id="2qT-xu-rv9"/>
                 <outlet property="rehashImgSwitch" destination="zO8-g9-mSC" id="762-cz-e66"/>
                 <outlet property="view" destination="Hz6-mo-xeY" id="0bl-1N-x8E"/>
             </connections>

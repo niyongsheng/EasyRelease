@@ -64,7 +64,7 @@ static void easyReleaseDono() {
 - (void)action {
     NPostNotification(@"\nIs being prepared\n");
     
-    // 1.1删除多余的空格和注释
+    // 1.删除多余的空格和注释
     if (NConfig.isDelAnnotation) {
         NSMutableArray<NSString *> *ignoreDirNames = [NSMutableArray array];
         for (NSDictionary *item in NConfig.ignoreArray) {
@@ -80,16 +80,16 @@ static void easyReleaseDono() {
         NPostNotification(@"Deleting comments and blank lines is completed\n");
     }
     
-    // 1.2修改图片hash
+    // 2.修改图片hash
     if (NConfig.isRehashImages) {
         @autoreleasepool {
             NPostNotification(@"Modifying the resource file...");
-            handleXcassetsFiles(NConfig.projectDirUrl.path);
+            rehashXcassetsFiles(NConfig.projectDirUrl.path);
         }
         NPostNotification(@"Modification of the resource file is completed");
     }
     
-    // 2.1类前缀+方法名替换
+    // 3.类前缀+方法名替换
     if (NConfig.replaceArray.count > 0) {
         
         NSMutableArray<NSString *> *ignoreDirNames = [NSMutableArray array];
@@ -98,6 +98,71 @@ static void easyReleaseDono() {
         }
         
         NPostNotification(@"Replace prefix substitution...");
+        for (NSDictionary *item in NConfig.replaceArray) {
+            if ([item[@"Type"] isEqualToString:@"global"] && [item[@"Enable"] isEqualToString:@"1"]) {
+                NSString *oldMethodNamePrefix = item[@"OldPrefix"];
+                NSString *newMethodNamePrefix = item[@"NewPrefix"];
+                if ([NYSUtils blankString:oldMethodNamePrefix] || [NYSUtils blankString:newMethodNamePrefix]) {
+                    NPostNotification(@"Modifying the method name prefix, Parameters are missing! \n");
+                }
+                
+                NSString *objPrefix = [NSString stringWithFormat:@"Begin modifying the method name prefix. %s > %s\n", oldMethodNamePrefix.UTF8String, newMethodNamePrefix.UTF8String];
+                NPostNotification(objPrefix);
+                @autoreleasepool {
+                    // 全局替换
+                    NPostNotification(@"Replacing name prefixes\n");
+                    modifyMethodsPrefix(NConfig.projectDirUrl.path, [NSMutableArray array], oldMethodNamePrefix, newMethodNamePrefix, YES, NSCaseInsensitiveSearch);
+                    
+                    NSString *objPrefix = [NSString stringWithFormat:@"Modifying the method name prefix is complete. %s > %s\n", oldMethodNamePrefix.UTF8String, newMethodNamePrefix.UTF8String];
+                    NPostNotification(objPrefix);
+                }
+            }
+        }
+        
+        for (NSDictionary *item in NConfig.replaceArray) {
+            if ([item[@"Type"] isEqualToString:@"method"] && [item[@"Enable"] isEqualToString:@"1"]) {
+                NSString *oldMethodNamePrefix = item[@"OldPrefix"];
+                NSString *newMethodNamePrefix = item[@"NewPrefix"];
+                if ([NYSUtils blankString:oldMethodNamePrefix] || [NYSUtils blankString:newMethodNamePrefix]) {
+                    NPostNotification(@"Modifying the method name prefix, Parameters are missing! \n");
+                }
+                
+                NSString *objPrefix = [NSString stringWithFormat:@"Begin modifying the method name prefix. %s > %s\n", oldMethodNamePrefix.UTF8String, newMethodNamePrefix.UTF8String];
+                NPostNotification(objPrefix);
+                @autoreleasepool {
+                    // 方法名替换
+                    NPostNotification(@"Replacing name prefixes\n");
+                    //                    changePrefix(NConfig.projectDirUrl.path, ignoreDirNames, oldMethodNamePrefix, newMethodNamePrefix, NSCaseInsensitiveSearch);
+                    modifyMethodsPrefix(NConfig.projectDirUrl.path, [NSMutableArray array], oldMethodNamePrefix, newMethodNamePrefix, NO, NSCaseInsensitiveSearch);
+                    
+                    NSString *objPrefix = [NSString stringWithFormat:@"Modifying the method name prefix is complete. %s > %s\n", oldMethodNamePrefix.UTF8String, newMethodNamePrefix.UTF8String];
+                    NPostNotification(objPrefix);
+                }
+            }
+        }
+        
+        for (NSDictionary *item in NConfig.replaceArray) {
+            if ([item[@"Type"] isEqualToString:@"method"] && [item[@"Enable"] isEqualToString:@"1"]) {
+                NSString *oldMethodNamePrefix = item[@"OldPrefix"];
+                NSString *newMethodNamePrefix = item[@"NewPrefix"];
+                if ([NYSUtils blankString:oldMethodNamePrefix] || [NYSUtils blankString:newMethodNamePrefix]) {
+                    NPostNotification(@"Modifying the method name prefix, Parameters are missing! \n");
+                }
+                
+                NSString *objPrefix = [NSString stringWithFormat:@"Begin modifying the method name prefix. %s > %s\n", oldMethodNamePrefix.UTF8String, newMethodNamePrefix.UTF8String];
+                NPostNotification(objPrefix);
+                @autoreleasepool {
+                    // 方法名替换
+                    NPostNotification(@"Replacing name prefixes\n");
+                    //                    changePrefix(NConfig.projectDirUrl.path, ignoreDirNames, oldMethodNamePrefix, newMethodNamePrefix, NSCaseInsensitiveSearch);
+                    modifyMethodsPrefix(NConfig.projectDirUrl.path, [NSMutableArray array], oldMethodNamePrefix, newMethodNamePrefix, NO, NSCaseInsensitiveSearch);
+                    
+                    NSString *objPrefix = [NSString stringWithFormat:@"Modifying the method name prefix is complete. %s > %s\n", oldMethodNamePrefix.UTF8String, newMethodNamePrefix.UTF8String];
+                    NPostNotification(objPrefix);
+                }
+            }
+        }
+        
         for (NSDictionary *item in NConfig.replaceArray) {
             if ([item[@"Type"] isEqualToString:@"class"] && [item[@"Enable"] isEqualToString:@"1"]) {
                 NSString *oldClassNamePrefix = item[@"OldPrefix"];
@@ -120,37 +185,25 @@ static void easyReleaseDono() {
                         continue;
                     }
                     // 修改类前缀
-                    modifyClassNamePrefix(projectContent, NConfig.projectDirUrl.path, ignoreDirNames, oldClassNamePrefix, newClassNamePrefix);
-                    [projectContent writeToFile:NConfig.projectFileDirUrl.path atomically:YES encoding:NSUTF8StringEncoding error:nil];
-                    
+                    modifyClassNamePrefix(projectContent, NConfig.projectDirUrl.path, [NSMutableArray array], oldClassNamePrefix, newClassNamePrefix);
+                    [projectContent writeToFile:projectFilePath atomically:YES encoding:NSUTF8StringEncoding error:&error];
+                    if (error) {
+                        NSString *obj = [NSString stringWithFormat:@"Write to project file fail: %s \n%s\n", projectFilePath.UTF8String, error.localizedFailureReason.UTF8String];
+                        NPostNotification(obj);
+                        continue;
+                    }
+                    // 替换文件中的引用名称
+                    modifyMethodsPrefix(NConfig.projectDirUrl.path, [NSMutableArray array], oldClassNamePrefix, newClassNamePrefix, NO, NSLiteralSearch);
                     NSString *objPrefix = [NSString stringWithFormat:@"Modifying the class name prefix is complete. %s > %s\n", oldClassNamePrefix.UTF8String, newClassNamePrefix.UTF8String];
-                    NPostNotification(objPrefix);
-                }
-                
-            } else if ([item[@"Type"] isEqualToString:@"method"] && [item[@"Enable"] isEqualToString:@"1"]) {
-                NSString *oldMethodNamePrefix = item[@"OldPrefix"];
-                NSString *newMethodNamePrefix = item[@"NewPrefix"];
-                if ([NYSUtils blankString:oldMethodNamePrefix] || [NYSUtils blankString:newMethodNamePrefix]) {
-                    NPostNotification(@"Modifying the method name prefix, Parameters are missing! \n");
-                }
-                
-                NSString *objPrefix = [NSString stringWithFormat:@"Begin modifying the method name prefix. %s > %s\n", oldMethodNamePrefix.UTF8String, newMethodNamePrefix.UTF8String];
-                NPostNotification(objPrefix);
-                @autoreleasepool {
-                    // 内部替换
-                    NPostNotification(@"Replacing name prefixes\n");
-//                    changePrefix(NConfig.projectDirUrl.path, ignoreDirNames, oldMethodNamePrefix, newMethodNamePrefix);
-                    changePrefix(NConfig.projectDirUrl.path, [NSMutableArray array], oldMethodNamePrefix, newMethodNamePrefix);
-                    
-                    NSString *objPrefix = [NSString stringWithFormat:@"Modifying the method name prefix is complete. %s > %s\n", oldMethodNamePrefix.UTF8String, newMethodNamePrefix.UTF8String];
                     NPostNotification(objPrefix);
                 }
             }
         }
+        
         NPostNotification(@"Replace prefix substitution is completed");
     }
     
-    // 3.1修改工程名
+    // 4.修改工程名
     if (NConfig.projectFileDirUrl && NConfig.projectOldName && NConfig.projectNewName) {
         @autoreleasepool {
             NSString *dir = NConfig.projectFileDirUrl.path.stringByDeletingLastPathComponent;
@@ -160,7 +213,7 @@ static void easyReleaseDono() {
         NPostNotification(@"Modification of project name completed\n");
     }
     
-    // 3.2pod install
+    // 5.pod install
     if (NConfig.isAutoPodInstall) {
         @autoreleasepool {
             NPostNotification(@"Installing third framework...");
@@ -174,7 +227,7 @@ static void easyReleaseDono() {
 
 
 #pragma mark - Xcassets中的图片rehash
-void handleXcassetsFiles(NSString *directory) {
+void rehashXcassetsFiles(NSString *directory) {
     NSLog(@"Xcassets dir :%@", directory);
     NSFileManager *fm = [NSFileManager defaultManager];
     BOOL isDirectory;
@@ -194,7 +247,7 @@ void handleXcassetsFiles(NSString *directory) {
     [task setArguments:[NSArray arrayWithObjects:path, directory, nil]];
     
     [task launch];
-
+    
     NSFileHandle *handle = [pipe fileHandleForReading];
     [handle waitForDataInBackgroundAndNotify];
     
@@ -245,7 +298,7 @@ void podInstall(NSString *directory) {
     [task setArguments:[NSArray arrayWithObjects:path, directory, nil]];
     
     [task launch];
-
+    
     NSFileHandle *handle = [pipe fileHandleForReading];
     [handle waitForDataInBackgroundAndNotify];
     
@@ -492,27 +545,32 @@ void modifyClassNamePrefix(NSMutableString *projectContent, NSString *sourceCode
         NSString *newClassName;
         if ([fileName hasPrefix:oldName]) {
             newClassName = [newName stringByAppendingString:[fileName substringFromIndex:oldName.length]];
-        } else {
-            // 处理是category的情况。当是category时，修改+号后面的类名前缀
-            NSString *oldNamePlus = [NSString stringWithFormat:@"+%@",oldName];
-            if ([fileName containsString:oldNamePlus]) {
-                NSMutableString *fileNameStr = [[NSMutableString alloc] initWithString:fileName];
-                [fileNameStr replaceCharactersInRange:[fileName rangeOfString:oldNamePlus] withString:[NSString stringWithFormat:@"+%@",newName]];
-                newClassName = fileNameStr;
-            } else {
-                newClassName = [newName stringByAppendingString:fileName];
-            }
-        }
-        
-        // 文件名 Const.ext > DDConst.ext
-        if ([fileExtension isEqualToString:@"h"]) {
-            NSString *mFileName = [fileName stringByAppendingPathExtension:@"m"];
-            if ([files containsObject:mFileName]) {
-                NSString *oldFilePath = [[sourceCodeDir stringByAppendingPathComponent:fileName] stringByAppendingPathExtension:@"h"];
-                NSString *newFilePath = [[sourceCodeDir stringByAppendingPathComponent:newClassName] stringByAppendingPathExtension:@"h"];
-                renameFile(oldFilePath, newFilePath);
-                oldFilePath = [[sourceCodeDir stringByAppendingPathComponent:fileName] stringByAppendingPathExtension:@"m"];
-                newFilePath = [[sourceCodeDir stringByAppendingPathComponent:newClassName] stringByAppendingPathExtension:@"m"];
+            
+            // 文件名 Const.ext > DDConst.ext
+            if ([fileExtension isEqualToString:@"h"]) {
+                NSString *mFileName = [fileName stringByAppendingPathExtension:@"m"];
+                if ([files containsObject:mFileName]) {
+                    NSString *oldFilePath = [[sourceCodeDir stringByAppendingPathComponent:fileName] stringByAppendingPathExtension:@"h"];
+                    NSString *newFilePath = [[sourceCodeDir stringByAppendingPathComponent:newClassName] stringByAppendingPathExtension:@"h"];
+                    renameFile(oldFilePath, newFilePath);
+                    oldFilePath = [[sourceCodeDir stringByAppendingPathComponent:fileName] stringByAppendingPathExtension:@"m"];
+                    newFilePath = [[sourceCodeDir stringByAppendingPathComponent:newClassName] stringByAppendingPathExtension:@"m"];
+                    renameFile(oldFilePath, newFilePath);
+                    oldFilePath = [[sourceCodeDir stringByAppendingPathComponent:fileName] stringByAppendingPathExtension:@"xib"];
+                    if ([fm fileExistsAtPath:oldFilePath]) {
+                        newFilePath = [[sourceCodeDir stringByAppendingPathComponent:newClassName] stringByAppendingPathExtension:@"xib"];
+                        renameFile(oldFilePath, newFilePath);
+                    }
+                    
+//                    @autoreleasepool {
+//                        modifyFilesClassName(sourceCodeDir, fileName, newClassName);
+//                    }
+                } else {
+                    continue;
+                }
+            } else if ([fileExtension isEqualToString:@"swift"]) {
+                NSString *oldFilePath = [[sourceCodeDir stringByAppendingPathComponent:fileName] stringByAppendingPathExtension:@"swift"];
+                NSString *newFilePath = [[sourceCodeDir stringByAppendingPathComponent:newClassName] stringByAppendingPathExtension:@"swift"];
                 renameFile(oldFilePath, newFilePath);
                 oldFilePath = [[sourceCodeDir stringByAppendingPathComponent:fileName] stringByAppendingPathExtension:@"xib"];
                 if ([fm fileExistsAtPath:oldFilePath]) {
@@ -520,37 +578,22 @@ void modifyClassNamePrefix(NSMutableString *projectContent, NSString *sourceCode
                     renameFile(oldFilePath, newFilePath);
                 }
                 
-                @autoreleasepool {
-                    modifyFilesClassName(NConfig.projectDirUrl.path, fileName, newClassName);
-                }
+//                @autoreleasepool {
+//                    modifyFilesClassName(sourceCodeDir, fileName.stringByDeletingPathExtension, newClassName);
+//                }
             } else {
                 continue;
             }
-        } else if ([fileExtension isEqualToString:@"swift"]) {
-            NSString *oldFilePath = [[sourceCodeDir stringByAppendingPathComponent:fileName] stringByAppendingPathExtension:@"swift"];
-            NSString *newFilePath = [[sourceCodeDir stringByAppendingPathComponent:newClassName] stringByAppendingPathExtension:@"swift"];
-            renameFile(oldFilePath, newFilePath);
-            oldFilePath = [[sourceCodeDir stringByAppendingPathComponent:fileName] stringByAppendingPathExtension:@"xib"];
-            if ([fm fileExistsAtPath:oldFilePath]) {
-                newFilePath = [[sourceCodeDir stringByAppendingPathComponent:newClassName] stringByAppendingPathExtension:@"xib"];
-                renameFile(oldFilePath, newFilePath);
-            }
             
-            @autoreleasepool {
-                modifyFilesClassName(NConfig.projectDirUrl.path, fileName.stringByDeletingPathExtension, newClassName);
-            }
-        } else {
-            continue;
+            // 修改工程文件中的文件名
+            NSString *regularExpression = [NSString stringWithFormat:@"\\b%@\\b", fileName];
+            regularReplacement(projectContent, regularExpression, newClassName);
         }
-        
-        // 修改工程文件中的文件名
-        NSString *regularExpression = [NSString stringWithFormat:@"\\b%@\\b", fileName];
-        regularReplacement(projectContent, regularExpression, newClassName);
     }
 }
 
 #pragma mark - 替换方法名前缀
-void changePrefix(NSString *sourceCodeDir, NSArray<NSString *> *ignoreDirNames,NSString *oldName, NSString *newName){
+void modifyMethodsPrefix(NSString *sourceCodeDir, NSArray<NSString *> *ignoreDirNames,NSString *oldName, NSString *newName, bool isGlobal, NSStringCompareOptions options){
     NSFileManager *fm = [NSFileManager defaultManager];
     
     // 遍历源代码文件 h 与 m 配对
@@ -560,7 +603,7 @@ void changePrefix(NSString *sourceCodeDir, NSArray<NSString *> *ignoreDirNames,N
         NSString *path = [sourceCodeDir stringByAppendingPathComponent:filePath];
         if ([fm fileExistsAtPath:path isDirectory:&isDirectory] && isDirectory) {
             if ([ignoreDirNames containsObject:filePath]) continue;
-            changePrefix(path, ignoreDirNames, oldName, newName);
+            modifyMethodsPrefix(path, ignoreDirNames, oldName, newName, isGlobal, options);
         }
         
         NSString *fileName = filePath.lastPathComponent.stringByDeletingPathExtension;
@@ -574,12 +617,12 @@ void changePrefix(NSString *sourceCodeDir, NSArray<NSString *> *ignoreDirNames,N
                 NSError *error = nil;
                 NSMutableString *fileContent = [NSMutableString stringWithContentsOfFile:mFilePath encoding:NSUTF8StringEncoding error:&error];
                 if ([fileContent containsString:oldName]) {
-                    [fileContent replaceOccurrencesOfString:oldName withString:newName options:NSCaseInsensitiveSearch range:NSMakeRange(0, fileContent.length)];
+                    [fileContent replaceOccurrencesOfString:oldName withString:newName options:options range:NSMakeRange(0, fileContent.length)];
                     [fileContent writeToFile:mFilePath atomically:YES encoding:NSUTF8StringEncoding error:nil];
                 }
                 NSMutableString *hfileConten = [NSMutableString stringWithContentsOfFile:hFilePath encoding:NSUTF8StringEncoding error:nil];
                 if ([hfileConten containsString:oldName]) {
-                    [hfileConten replaceOccurrencesOfString:oldName withString:newName options:NSCaseInsensitiveSearch range:NSMakeRange(0, hfileConten.length)];
+                    [hfileConten replaceOccurrencesOfString:oldName withString:newName options:options range:NSMakeRange(0, hfileConten.length)];
                     [hfileConten writeToFile:hFilePath atomically:YES encoding:NSUTF8StringEncoding error:nil];
                 }
             } else if ([files containsObject:mmFileName]) {
@@ -588,22 +631,55 @@ void changePrefix(NSString *sourceCodeDir, NSArray<NSString *> *ignoreDirNames,N
                 NSError *error = nil;
                 NSMutableString *fileContent = [NSMutableString stringWithContentsOfFile:mFilePath encoding:NSUTF8StringEncoding error:&error];
                 if ([fileContent containsString:oldName]) {
-                    [fileContent replaceOccurrencesOfString:oldName withString:newName options:NSCaseInsensitiveSearch range:NSMakeRange(0, fileContent.length)];
+                    [fileContent replaceOccurrencesOfString:oldName withString:newName options:options range:NSMakeRange(0, fileContent.length)];
                     [fileContent writeToFile:mFilePath atomically:YES encoding:NSUTF8StringEncoding error:nil];
                 }
                 NSMutableString *hfileConten = [NSMutableString stringWithContentsOfFile:hFilePath encoding:NSUTF8StringEncoding error:nil];
                 if ([hfileConten containsString:oldName]) {
-                    [hfileConten replaceOccurrencesOfString:oldName withString:newName options:NSCaseInsensitiveSearch range:NSMakeRange(0, hfileConten.length)];
+                    [hfileConten replaceOccurrencesOfString:oldName withString:newName options:options range:NSMakeRange(0, hfileConten.length)];
                     [hfileConten writeToFile:hFilePath atomically:YES encoding:NSUTF8StringEncoding error:nil];
                 }
             } else {
                 NSString *hFilePath = [[sourceCodeDir stringByAppendingPathComponent:fileName] stringByAppendingPathExtension:@"h"];
                 NSMutableString *hfileConten = [NSMutableString stringWithContentsOfFile:hFilePath encoding:NSUTF8StringEncoding error:nil];
                 if ([hfileConten containsString:oldName]) {
-                    [hfileConten replaceOccurrencesOfString:oldName withString:newName options:NSCaseInsensitiveSearch range:NSMakeRange(0, hfileConten.length)];
+                    [hfileConten replaceOccurrencesOfString:oldName withString:newName options:options range:NSMakeRange(0, hfileConten.length)];
                     [hfileConten writeToFile:hFilePath atomically:YES encoding:NSUTF8StringEncoding error:nil];
                 }
             }
+        } else if ([fileExtension isEqualToString:@"pch"]) {
+            NSString *pchFilePath = [[sourceCodeDir stringByAppendingPathComponent:fileName] stringByAppendingPathExtension:@"pch"];
+            NSMutableString *pchfileConten = [NSMutableString stringWithContentsOfFile:pchFilePath encoding:NSUTF8StringEncoding error:nil];
+            if ([pchfileConten containsString:oldName]) {
+                [pchfileConten replaceOccurrencesOfString:oldName withString:newName options:options range:NSMakeRange(0, pchfileConten.length)];
+                [pchfileConten writeToFile:pchFilePath atomically:YES encoding:NSUTF8StringEncoding error:nil];
+            }
+        } else if ([fileExtension isEqualToString:@"xib"]) {
+            NSString *xibFilePath = [[sourceCodeDir stringByAppendingPathComponent:fileName] stringByAppendingPathExtension:@"xib"];
+            NSMutableString *xibfileConten = [NSMutableString stringWithContentsOfFile:xibFilePath encoding:NSUTF8StringEncoding error:nil];
+            if ([xibfileConten containsString:oldName]) {
+                [xibfileConten replaceOccurrencesOfString:oldName withString:newName options:options range:NSMakeRange(0, xibfileConten.length)];
+                [xibfileConten writeToFile:xibFilePath atomically:YES encoding:NSUTF8StringEncoding error:nil];
+            }
+        } else if ([fileExtension isEqualToString:@"storyboard"] && isGlobal) {
+            NSString *storyboardFilePath = [[sourceCodeDir stringByAppendingPathComponent:fileName] stringByAppendingPathExtension:@"storyboard"];
+            NSMutableString *storyboardfileConten = [NSMutableString stringWithContentsOfFile:storyboardFilePath encoding:NSUTF8StringEncoding error:nil];
+            if ([storyboardfileConten containsString:oldName]) {
+                [storyboardfileConten replaceOccurrencesOfString:oldName withString:newName options:options range:NSMakeRange(0, storyboardfileConten.length)];
+                [storyboardfileConten writeToFile:storyboardFilePath atomically:YES encoding:NSUTF8StringEncoding error:nil];
+            }
+        } else if ([fileExtension isEqualToString:@"xml"] && isGlobal) {
+            NSString *xmlFilePath = [[sourceCodeDir stringByAppendingPathComponent:fileName] stringByAppendingPathExtension:@"xml"];
+            NSMutableString *xmlfileConten = [NSMutableString stringWithContentsOfFile:xmlFilePath encoding:NSUTF8StringEncoding error:nil];
+            if ([xmlfileConten containsString:oldName]) {
+                [xmlfileConten replaceOccurrencesOfString:oldName withString:newName options:options range:NSMakeRange(0, xmlfileConten.length)];
+                [xmlfileConten writeToFile:xmlFilePath atomically:YES encoding:NSUTF8StringEncoding error:nil];
+            }
+        } else if ([fileExtension isEqualToString:@"imageset"] && isGlobal) {
+            NSString *imagesetFilePath = [[sourceCodeDir stringByAppendingPathComponent:fileName] stringByAppendingPathExtension:@"imageset"];
+            NSString *fileNameNew = [fileName stringByReplacingOccurrencesOfString:oldName withString:newName];
+            NSString *imagesetNewFilePath = [[sourceCodeDir stringByAppendingPathComponent:fileNameNew] stringByAppendingPathExtension:@"imageset"];
+            renameFile(imagesetFilePath, imagesetNewFilePath);
         }
     }
 }

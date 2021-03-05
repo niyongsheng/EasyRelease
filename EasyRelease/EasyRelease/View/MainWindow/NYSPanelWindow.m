@@ -43,6 +43,9 @@
         if ([NYSUtils blankString:replaceDict[@"NewPrefix"]] && ![NYSUtils blankString:replaceDict[@"OldPrefix"]]) {
             NSMutableDictionary *mutableReplaceDict = [NSMutableDictionary dictionaryWithDictionary:replaceDict];
             NSString *newValue = [NSString stringWithFormat:@"%@_%@", capitalStr, replaceDict[@"OldPrefix"]];
+            if ([replaceDict[@"Type"] isEqual:@"global"]) {
+                newValue = [NSString stringWithFormat:@"%@_", capitalStr];
+            }
             [mutableReplaceDict setValue:newValue forKey:@"NewPrefix"];
             NConfig.replaceArray[i] = mutableReplaceDict;
         }

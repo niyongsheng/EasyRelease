@@ -18,7 +18,6 @@
 		C80DF41525E3A52800DC36EC /* NYSUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = C80DF41425E3A52800DC36EC /* NYSUtils.m */; };
 		C80FA01B25EF23D10007F522 /* NYSPanelWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = C80FA01A25EF23D10007F522 /* NYSPanelWindow.m */; };
 		C80FA01D25EF24B20007F522 /* NYSPanelWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = C80FA01C25EF24B20007F522 /* NYSPanelWindow.xib */; };
-		C80FA01F25EF52560007F522 /* Relauncher in Resources */ = {isa = PBXBuildFile; fileRef = C80FA01E25EF52560007F522 /* Relauncher */; };
 		C80FA0A325EF63690007F522 /* EasyRelease.json in Resources */ = {isa = PBXBuildFile; fileRef = C80FA0A225EF63690007F522 /* EasyRelease.json */; };
 		C81B0E9B25E4E12F0067CA1A /* NSObject+YYModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C81B0E9825E4E12F0067CA1A /* NSObject+YYModel.m */; };
 		C81B0E9C25E4E12F0067CA1A /* YYClassInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = C81B0E9925E4E12F0067CA1A /* YYClassInfo.m */; };
@@ -98,7 +97,6 @@
 		C80FA01925EF23D10007F522 /* NYSPanelWindow.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NYSPanelWindow.h; sourceTree = "<group>"; };
 		C80FA01A25EF23D10007F522 /* NYSPanelWindow.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NYSPanelWindow.m; sourceTree = "<group>"; };
 		C80FA01C25EF24B20007F522 /* NYSPanelWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NYSPanelWindow.xib; sourceTree = "<group>"; };
-		C80FA01E25EF52560007F522 /* Relauncher */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = Relauncher; sourceTree = "<group>"; };
 		C80FA0A225EF63690007F522 /* EasyRelease.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = EasyRelease.json; sourceTree = "<group>"; };
 		C81B0E9625E4E12F0067CA1A /* YYClassInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YYClassInfo.h; sourceTree = "<group>"; };
 		C81B0E9725E4E12F0067CA1A /* YYModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YYModel.h; sourceTree = "<group>"; };
@@ -351,7 +349,6 @@
 		C865618925CCE830009CC8DE /* Custom */ = {
 			isa = PBXGroup;
 			children = (
-				C80FA01E25EF52560007F522 /* Relauncher */,
 				C82C207525EE672F0065F9D4 /* GitHubUpdates.framework */,
 				C81B0E9525E4E12F0067CA1A /* YYModel */,
 				C80DF3E525E384A600DC36EC /* ArtProgressHUD */,
@@ -517,7 +514,6 @@
 				C80DF3FF25E384A600DC36EC /* MLHudAlertError.png in Resources */,
 				C86560EE25CBF16F009CC8DE /* MainMenu.xib in Resources */,
 				C80DF40125E384A600DC36EC /* MLHudAlertWarn.png in Resources */,
-				C80FA01F25EF52560007F522 /* Relauncher in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -716,7 +712,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MARKETING_VERSION = 1.3;
+				MARKETING_VERSION = 1.4;
 				PRODUCT_BUNDLE_IDENTIFIER = com.nys.EasyRelease;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_INSTALL_OBJC_HEADER = YES;
@@ -751,7 +747,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MARKETING_VERSION = 1.3;
+				MARKETING_VERSION = 1.4;
 				PRODUCT_BUNDLE_IDENTIFIER = com.nys.EasyRelease;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_INSTALL_OBJC_HEADER = YES;
