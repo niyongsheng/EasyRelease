@@ -100,7 +100,7 @@
 
             if (model.isSasS) { // SasS环境下自动配置
                 if (model.isAuto) {
-                    NSString *prefixStr = [NYSUtils generateRandomString:4];
+                    NSString *prefixStr = [NYSUtils generateRandomString:6];
                     NSString *capitalStr = [NYSUtils getCapitalString:prefixStr];
                     if (![NYSUtils blankString:model.projectNewName]) {
                         capitalStr = [NYSUtils getCapitalString:model.projectNewName];

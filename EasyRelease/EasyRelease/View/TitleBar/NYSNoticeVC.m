@@ -33,7 +33,7 @@
     NSString *app_Version = [infoDictionary objectForKey:@"CFBundleShortVersionString"];
     
     _noticeText = [[NYSFitSizeTextButton alloc] initWithFrame:NSMakeRect(22, 0, 400, 15)];
-    [_noticeText setTitle:[NSString stringWithFormat:@"EasyRelease %@ version, click to visit in github.", app_Version]
+    [_noticeText setTitle:[NSString stringWithFormat:@"How to user EasyRelease%@，please visit in GitHub.", app_Version]
           withNormalColor:[NSColor colorWithRGBInt:0xffffff]
                hoverColor:[NSColor colorWithRGBInt:0xffffff]];
     [_noticeText setTarget:self];

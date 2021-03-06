@@ -93,8 +93,8 @@
     [alert setIcon:[NSImage imageNamed:@"user_photo_default"]];
     [alert addButtonWithTitle:@"Issues"];
     [alert addButtonWithTitle:@"Cancel"];
-    [alert setMessageText:@"Easy Release"];
-    [alert setInformativeText:app_Version];
+    [alert setMessageText:@"Your time may not be valuable but it is worth taking seriously."];
+    [alert setInformativeText:[@"Version:" stringByAppendingString:app_Version]];
     [alert setAlertStyle:NSAlertStyleInformational];
     [alert beginSheetModalForWindow:[self.view window] completionHandler:^(NSModalResponse returnCode) {
         if (returnCode == NSAlertFirstButtonReturn) {

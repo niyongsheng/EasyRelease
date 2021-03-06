@@ -261,6 +261,7 @@
                                 <objectValues>
                                     <string>class</string>
                                     <string>method</string>
+                                    <string>global</string>
                                 </objectValues>
                             </comboBoxCell>
                         </comboBox>
