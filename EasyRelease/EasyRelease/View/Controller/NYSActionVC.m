@@ -76,6 +76,66 @@
     return self;
 }
 
+- (void)handelConfig:(NYSConfigModel *)model url:(NSURL *)url {
+    NSString *pnStr = url.path.lastPathComponent.stringByDeletingPathExtension;
+    NSString *pPath = url.path.stringByDeletingLastPathComponent;
+    if ([NYSUtils blankString:model.projectFileDirUrl.absoluteString]) {
+        NSString *pfdStr = [[pPath stringByAppendingPathComponent:pnStr] stringByAppendingPathExtension:@"xcodeproj"];
+        NSString *charactersToEscape = @"?!@#$^&%*+,:;='\"`<>()[]{}/\\| ";
+        NSCharacterSet *allowedCharacters = [[NSCharacterSet characterSetWithCharactersInString:charactersToEscape] invertedSet];
+        NSString *encodePfdStr = [pfdStr stringByAddingPercentEncodingWithAllowedCharacters:allowedCharacters];
+        model.projectFileDirUrl = [NSURL URLWithString:encodePfdStr];
+    }
+    if ([NYSUtils blankString:model.projectDirUrl.absoluteString]) {
+        NSString *pdStr = [pPath stringByAppendingPathComponent:pnStr];
+        NSString *charactersToEscape = @"?!@#$^&%*+,:;='\"`<>()[]{}/\\| ";
+        NSCharacterSet *allowedCharacters = [[NSCharacterSet characterSetWithCharactersInString:charactersToEscape] invertedSet];
+        NSString *encodePdStr = [pdStr stringByAddingPercentEncodingWithAllowedCharacters:allowedCharacters];
+        model.projectDirUrl = [NSURL URLWithString:encodePdStr];
+    }
+    
+    if (model.isSasS) { // SasS环境下自动配置
+        if (model.isAuto) {
+            NSString *prefixStr = [NYSUtils generateRandomString:6];
+            NSString *capitalStr = [NYSUtils getCapitalString:prefixStr];
+            if (![NYSUtils blankString:model.projectNewName]) {
+                capitalStr = [NYSUtils getCapitalString:model.projectNewName];
+            }
+            if ([NYSUtils blankString:model.projectNewName] && [NYSUtils blankString:model.projectOldName]) {
+                model.projectOldName = pnStr;
+                model.projectNewName = [NSString stringWithFormat:@"%@_%@", prefixStr, pnStr];
+            } else if ([NYSUtils blankString:model.projectNewName] && ![NYSUtils blankString:model.projectOldName]) {
+                model.projectNewName = [NSString stringWithFormat:@"%@_%@", prefixStr, model.projectOldName];
+            } else if (![NYSUtils blankString:model.projectNewName] && [NYSUtils blankString:model.projectOldName]) {
+                model.projectOldName = pnStr;
+            }
+            
+            for (int i = 0; i < model.replaceArray.count; i++) {
+                NSDictionary *replaceDict = model.replaceArray[i];
+                if ([NYSUtils blankString:replaceDict[@"NewPrefix"]] && ![NYSUtils blankString:replaceDict[@"OldPrefix"]]) {
+                    NSMutableDictionary *mutableReplaceDict = [NSMutableDictionary dictionaryWithDictionary:replaceDict];
+                    NSString *newValue = [NSString stringWithFormat:@"%@_%@", capitalStr, replaceDict[@"OldPrefix"]];
+                    if ([replaceDict[@"Type"] isEqual:@"global"]) {
+                        newValue = [NSString stringWithFormat:@"%@_", capitalStr];
+                    }
+                    [mutableReplaceDict setValue:newValue forKey:@"NewPrefix"];
+                    model.replaceArray[i] = mutableReplaceDict;
+                }
+            }
+        } else {
+            // 手动配置
+            self.panelWindow.oldProjectName = pnStr;
+            [self.panelWindow makeKeyAndOrderFront:self];
+        }
+    }
+    NConfig = model;
+    
+    // 发送刷新配置通知
+    NSString *objStr = [NConfig yy_modelToJSONString];
+    [[NSNotificationCenter defaultCenter] postNotificationName:RefreshConfNotice object:nil userInfo:nil];
+    [[NSNotificationCenter defaultCenter] postNotificationName:ActionInfoNotice object:objStr];
+}
+
 - (IBAction)uploadJsonFile:(NSButton *)sender {
     NSOpenPanel *oPanel = [NSOpenPanel openPanel];
     [oPanel setCanChooseDirectories:NO];
@@ -88,56 +148,30 @@
         NSString *str = [[NSString alloc] initWithData:[[NSData alloc] initWithContentsOfURL:url] encoding:NSUTF8StringEncoding];
         if ([NConfig yy_modelSetWithJSON:str]) {
             NYSConfigModel *model = [NYSConfigModel yy_modelWithJSON:str];
-            
-            NSString *pnStr = url.path.lastPathComponent.stringByDeletingPathExtension;
-            NSString *pPath = url.path.stringByDeletingLastPathComponent;
-            if ([NYSUtils blankString:model.projectFileDirUrl.absoluteString]) {
-                model.projectFileDirUrl = [NSURL URLWithString:[pPath stringByAppendingFormat:@"/%@.xcodeproj", pnStr]];
-            }
-            if ([NYSUtils blankString:model.projectDirUrl.absoluteString]) {
-                model.projectDirUrl = [NSURL URLWithString:[pPath stringByAppendingPathComponent:pnStr]];
-            }
-
-            if (model.isSasS) { // SasS环境下自动配置
-                if (model.isAuto) {
-                    NSString *prefixStr = [NYSUtils generateRandomString:6];
-                    NSString *capitalStr = [NYSUtils getCapitalString:prefixStr];
-                    if (![NYSUtils blankString:model.projectNewName]) {
-                        capitalStr = [NYSUtils getCapitalString:model.projectNewName];
+            NSDictionary *infoDictionary = [[NSBundle mainBundle] infoDictionary];
+            NSString *app_Version = [infoDictionary objectForKey:@"CFBundleShortVersionString"];
+            if ([model.version isEqual:app_Version]) {
+                [self handelConfig:model url:url];
+            } else {
+                NSAlert *alert = [[NSAlert alloc] init];
+                [alert addButtonWithTitle:@"Continue"];
+                [alert addButtonWithTitle:@"Download"];
+                [alert addButtonWithTitle:@"Cancel"];
+                [alert setAlertStyle:NSAlertStyleCritical];
+                [alert setMessageText:@"Mismatched Config"];
+                [alert setInformativeText:@"Mismatching config version numbers may cause an exception."];
+                [alert beginSheetModalForWindow:[self.view window] completionHandler:^(NSModalResponse returnCode) {
+                    if (returnCode == NSAlertFirstButtonReturn) {
+                        [self handelConfig:model url:url];
+                    } else if (returnCode == NSAlertSecondButtonReturn) {
+                        [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:[ER_GH stringByAppendingString:@"/releases"]]];
+                    } else {
+                        NSLog(@"onclicked cancel");
                     }
-                    if ([NYSUtils blankString:model.projectNewName] && [NYSUtils blankString:model.projectOldName]) {
-                        model.projectOldName = pnStr;
-                        model.projectNewName = [NSString stringWithFormat:@"%@_%@", prefixStr, pnStr];
-                    } else if ([NYSUtils blankString:model.projectNewName] && ![NYSUtils blankString:model.projectOldName]) {
-                        model.projectNewName = [NSString stringWithFormat:@"%@_%@", prefixStr, model.projectOldName];
-                    } else if (![NYSUtils blankString:model.projectNewName] && [NYSUtils blankString:model.projectOldName]) {
-                        model.projectOldName = pnStr;
-                    }
-                    
-                    for (int i = 0; i < model.replaceArray.count; i++) {
-                        NSDictionary *replaceDict = model.replaceArray[i];
-                        if ([NYSUtils blankString:replaceDict[@"NewPrefix"]] && ![NYSUtils blankString:replaceDict[@"OldPrefix"]]) {
-                            NSMutableDictionary *mutableReplaceDict = [NSMutableDictionary dictionaryWithDictionary:replaceDict];
-                            NSString *newValue = [NSString stringWithFormat:@"%@_%@", capitalStr, replaceDict[@"OldPrefix"]];
-                            if ([replaceDict[@"Type"] isEqual:@"global"]) {
-                                newValue = [NSString stringWithFormat:@"%@_", capitalStr];
-                            }
-                            [mutableReplaceDict setValue:newValue forKey:@"NewPrefix"];
-                            model.replaceArray[i] = mutableReplaceDict;
-                        }
-                    }
-                } else {
-                    // 手动配置
-                    self.panelWindow.oldProjectName = pnStr;
-                    [self.panelWindow makeKeyAndOrderFront:self];
-                }
+                }];
             }
-            NConfig = model;
-            // 发送刷新配置通知
-            [[NSNotificationCenter defaultCenter] postNotificationName:RefreshConfNotice object:nil userInfo:nil];
-            [[NSNotificationCenter defaultCenter] postNotificationName:ActionInfoNotice object:[NConfig yy_modelToJSONString]];
         } else {
-            [ArtProgressHUD showErrorText:@"error json file"];
+            [ArtProgressHUD showErrorText:@"Mismatched format"];
         }
     }
 }
@@ -203,7 +237,7 @@
         return;
     }
     
-    // action change...
+    // action go go go...
     @try {
         [sender setEnabled:NO];
         

@@ -38,6 +38,8 @@
 #define ItemHeight 60
 #endif
 
+#define ER_GH @"https://github.com/niyongsheng/EasyRelease"
+
 #import "EasyRelease-Bridging-Header.h"
 #import "EasyRelease-Swift.h"
 #import "NYSUtils.h"

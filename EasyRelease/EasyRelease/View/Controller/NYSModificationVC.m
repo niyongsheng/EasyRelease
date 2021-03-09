@@ -50,7 +50,7 @@
         [alert addButtonWithTitle:@"Uninstall"];
         [alert setIcon:[NSImage imageNamed:@"terminal"]];
         [alert setMessageText:@"Install imagemagick"];
-        [alert setInformativeText:@"https://github.com/niyongsheng/EasyRelease/blob/master/README.md#Imagemagick"];
+        [alert setInformativeText:[ER_GH stringByAppendingString:@"/blob/master/README.md#Imagemagick"]];
         [alert setAlertStyle:NSAlertStyleInformational];
         [alert beginSheetModalForWindow:[self.view window] completionHandler:^(NSModalResponse returnCode) {
             if (returnCode == NSAlertFirstButtonReturn) {
@@ -73,7 +73,7 @@
         [alert addButtonWithTitle:@"Uninstall"];
         [alert setIcon:[NSImage imageNamed:@"terminal"]];
         [alert setMessageText:@"Install CocoaPods"];
-        [alert setInformativeText:@"https://github.com/niyongsheng/EasyRelease/blob/master/README.md#CocoaPods"];
+        [alert setInformativeText:[ER_GH stringByAppendingString:@"/blob/master/README.md#CocoaPods"]];
         [alert setAlertStyle:NSAlertStyleInformational];
         [alert beginSheetModalForWindow:[self.view window] completionHandler:^(NSModalResponse returnCode) {
             if (returnCode == NSAlertFirstButtonReturn) {

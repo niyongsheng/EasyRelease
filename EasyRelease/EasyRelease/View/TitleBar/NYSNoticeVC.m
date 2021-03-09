@@ -33,7 +33,7 @@
     NSString *app_Version = [infoDictionary objectForKey:@"CFBundleShortVersionString"];
     
     _noticeText = [[NYSFitSizeTextButton alloc] initWithFrame:NSMakeRect(22, 0, 400, 15)];
-    [_noticeText setTitle:[NSString stringWithFormat:@"How to user EasyRelease%@，please visit in GitHub.", app_Version]
+    [_noticeText setTitle:[NSString stringWithFormat:@"How to user EasyRelease v%@，please visit in GitHub.", app_Version]
           withNormalColor:[NSColor colorWithRGBInt:0xffffff]
                hoverColor:[NSColor colorWithRGBInt:0xffffff]];
     [_noticeText setTarget:self];
@@ -47,7 +47,7 @@
 }
 
 - (void)noticeBtnClicked:(id)sender {
-    [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"https://github.com/niyongsheng/EasyRelease"]];
+    [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:ER_GH]];
 }
 
 @end

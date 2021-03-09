@@ -23,8 +23,21 @@
     NSString *pfd = dic[@"projectFileDirUrl"];
     NSString *pd = dic[@"projectDirUrl"];
     if (![pfd isKindOfClass:[NSString class]] || ![pd isKindOfClass:[NSString class]]) return NO;
-    _projectFileDirUrl = [NSURL URLWithString:pfd];
-    _projectDirUrl = [NSURL URLWithString:pd];
+    NSString *charactersToEscape = @"?!@#$^&%*+,:;='\"`<>()[]{}/\\| ";
+    NSCharacterSet *allowedCharacters = [[NSCharacterSet characterSetWithCharactersInString:charactersToEscape] invertedSet];
+    _projectFileDirUrl = [NSURL URLWithString:[pfd stringByAddingPercentEncodingWithAllowedCharacters:allowedCharacters]];
+    _projectDirUrl = [NSURL URLWithString:[pd stringByAddingPercentEncodingWithAllowedCharacters:allowedCharacters]];
+    return YES;
+}
+
+- (BOOL)modelCustomTransformToDictionary:(NSMutableDictionary *)dic {
+    NSString *version = dic[@"version"];
+    NSString *desc = dic[@"desc"];
+    if (![version isKindOfClass:[NSString class]] || ![desc isKindOfClass:[NSString class]]) return NO;
+    NSDictionary *infoDictionary = [[NSBundle mainBundle] infoDictionary];
+    NSString *app_Version = [infoDictionary objectForKey:@"CFBundleShortVersionString"];
+    dic[@"version"] = app_Version;
+    dic[@"desc"] = ER_GH;
     return YES;
 }
 

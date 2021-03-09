@@ -22,6 +22,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) BOOL isAutoPodInstall;
 @property (nonatomic, assign) BOOL isAuto;
 @property (nonatomic, assign) BOOL isSasS;
+@property (nonatomic, strong) NSString *version;
+@property (nonatomic, strong) NSString *desc;
 @end
 
 NS_ASSUME_NONNULL_END

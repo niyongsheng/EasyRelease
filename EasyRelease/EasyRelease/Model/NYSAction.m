@@ -229,6 +229,7 @@ static void easyReleaseDono() {
 #pragma mark - Xcassets中的图片rehash
 void rehashXcassetsFiles(NSString *directory) {
     NSLog(@"Xcassets dir :%@", directory);
+    
     NSFileManager *fm = [NSFileManager defaultManager];
     BOOL isDirectory;
     [fm fileExistsAtPath:directory isDirectory:&isDirectory];
@@ -237,6 +238,8 @@ void rehashXcassetsFiles(NSString *directory) {
         NPostNotification(info);
         return;
     }
+    NSCharacterSet *allowedCharacters = [[NSCharacterSet characterSetWithCharactersInString:@"?!@#$^&%*+,:;='\"`<>()[]{}/\\| "] invertedSet];
+    directory = [directory stringByAddingPercentEncodingWithAllowedCharacters:allowedCharacters];
     
     NSTask *task = [[NSTask alloc] init];
     NSPipe *pipe = [NSPipe pipe];
@@ -280,6 +283,7 @@ void rehashXcassetsFiles(NSString *directory) {
 #pragma mark - pod install
 void podInstall(NSString *directory) {
     NSLog(@"Pod install dir :%@", directory);
+    
     NSFileManager *fm = [NSFileManager defaultManager];
     BOOL isDirectory;
     [fm fileExistsAtPath:directory isDirectory:&isDirectory];
@@ -288,6 +292,7 @@ void podInstall(NSString *directory) {
         NPostNotification(info);
         return;
     }
+    directory = [directory stringByReplacingOccurrencesOfString:@" " withString:@"\0"];
     
     NSTask *task = [[NSTask alloc] init];
     NSPipe *pipe = [NSPipe pipe];

@@ -47,6 +47,9 @@
                 </textField>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="8ei-mQ-c0L">
                     <rect key="frame" x="48" y="539" width="76" height="16"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="72" id="oAS-t5-Um9"/>
+                    </constraints>
                     <textFieldCell key="cell" lineBreakMode="clipping" title="Project File:" id="3Lz-Sk-bme">
                         <font key="font" usesAppearanceFont="YES"/>
                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -76,6 +79,9 @@
                 </textField>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="d2l-dd-vrh">
                     <rect key="frame" x="48" y="473" width="111" height="16"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="107" id="BqV-Xr-uZJ"/>
+                    </constraints>
                     <textFieldCell key="cell" lineBreakMode="clipping" title="Project Directory:" id="OZv-N0-Ecl">
                         <font key="font" usesAppearanceFont="YES"/>
                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>

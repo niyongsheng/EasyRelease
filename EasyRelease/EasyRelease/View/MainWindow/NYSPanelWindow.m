@@ -52,8 +52,9 @@
     }
     
     // 发送刷新配置通知
+    NSString *objStr = [NConfig yy_modelToJSONString];
     [[NSNotificationCenter defaultCenter] postNotificationName:RefreshConfNotice object:nil userInfo:nil];
-    [[NSNotificationCenter defaultCenter] postNotificationName:ActionInfoNotice object:[NConfig yy_modelToJSONString]];
+    [[NSNotificationCenter defaultCenter] postNotificationName:ActionInfoNotice object:objStr];
 }
 
 @end

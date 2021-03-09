@@ -27,5 +27,7 @@
     }
   ],
   "projectOldName": "EasyRelease",
-  "projectNewName": "EasyReleaseNew"
+  "projectNewName": "EasyReleaseNew",
+  "version": "1.0",
+  "desc": "https://github.com/niyongsheng/EasyRelease"
 }

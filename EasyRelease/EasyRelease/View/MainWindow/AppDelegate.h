@@ -6,10 +6,13 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import <GitHubUpdates/GitHubUpdates.h>
 
 @interface AppDelegate : NSObject <NSApplicationDelegate>
 
 @property (nonatomic, strong) NSWindowController *mainWC;
+
+@property (nonatomic, strong) GitHubUpdater *updater;
 
 @end
 

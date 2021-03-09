@@ -10,6 +10,7 @@
 #import "NYSImageButton.h"
 #import "NYSTextButton.h"
 #import "NYSNoticeVC.h"
+#import "AppDelegate.h"
 
 @interface NYSTitleBarVC ()
 
@@ -82,7 +83,7 @@
 - (void)minBtnClicked:(id)sender {
 //    [self.view.window miniaturize:self];
 //    [[NSApp mainWindow] miniaturize:nil];
-    [[NSApp mainWindow] performMiniaturize:self];
+    [[NSApp mainWindow] performMiniaturize:sender];
 }
 
 - (void)settingBtnClicked:(id)sender {
@@ -92,14 +93,18 @@
     NSAlert *alert = [[NSAlert alloc] init];
     [alert setIcon:[NSImage imageNamed:@"user_photo_default"]];
     [alert addButtonWithTitle:@"Issues"];
+    [alert addButtonWithTitle:@"Update"];
     [alert addButtonWithTitle:@"Cancel"];
     [alert setMessageText:@"Your time may not be valuable but it is worth taking seriously."];
     [alert setInformativeText:[@"Version:" stringByAppendingString:app_Version]];
     [alert setAlertStyle:NSAlertStyleInformational];
     [alert beginSheetModalForWindow:[self.view window] completionHandler:^(NSModalResponse returnCode) {
         if (returnCode == NSAlertFirstButtonReturn) {
-            [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"https://github.com/niyongsheng/EasyRelease/issues/new"]];
+            [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:[ER_GH stringByAppendingString:@"/issues/new"]]];
         } else if (returnCode == NSAlertSecondButtonReturn) {
+            AppDelegate *delegate = [NSApplication sharedApplication].delegate;
+            [delegate.updater checkForUpdates:nil];
+        } else {
             NSLog(@"onclicked cancel");
         }
     }];

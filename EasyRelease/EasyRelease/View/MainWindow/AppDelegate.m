@@ -7,19 +7,18 @@
 
 #import "AppDelegate.h"
 #import "MainWindowController.h"
-#import <GitHubUpdates/GitHubUpdates.h>
 
 @interface AppDelegate ()
 
 @property (nonatomic, strong) MainWindowController *mainWindowController;
-
-@property (nonatomic, strong) GitHubUpdater *updater;
 
 @end
 
 @implementation AppDelegate
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
+    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"NSConstraintBasedLayoutVisualizeMutuallyExclusiveConstraints"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
     
     self.mainWindowController = [[MainWindowController alloc] init];
     [[_mainWindowController window] center];
