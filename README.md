@@ -35,6 +35,11 @@ brew install cocoapods
 ```
 ## Usage
 
+### NTOCC project usage：
+>1. [Download](https://github.com/niyongsheng/EasyRelease/releases) configuration file `NtoccShipper.json` or `NtoccDriver.json` put that `.xcodeproj` in the same directory;
+>2. Import the configuration file under `EasyRelease` and enter the new project name;
+>3. Click `Action` button;
+
 ```json
 {
     "isSasS": false,
@@ -76,11 +81,6 @@ brew install cocoapods
   `"isSasS": true` automatic mode - name `.json` with the `.xcodeproj` filename;<br>
   `"isSasS": true && "isAuto": false` Semi-automatic mode - need to specify a new project name, prefix is automatically extracted;<br>
   `"isSasS": true && "isAuto": true` Full auto mode - new item names are randomly generated, prefix is automatically extracted;
-
-### NTOCC project usage：
->1. [Download](https://github.com/niyongsheng/EasyRelease/releases) configuration file `NtoccShipper.json` or `NtoccDriver.json` put that `.xcodeproj` in the same directory;
->2. Import the configuration file under `EasyRelease` and enter the new project name;
->3. Click `Action` button;
 
 ## Remind
 `macOS 10.15+ `

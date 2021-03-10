@@ -292,7 +292,7 @@ void podInstall(NSString *directory) {
         NPostNotification(info);
         return;
     }
-    directory = [directory stringByReplacingOccurrencesOfString:@" " withString:@"\0"];
+    directory = quotedFromString(directory);
     
     NSTask *task = [[NSTask alloc] init];
     NSPipe *pipe = [NSPipe pipe];
@@ -332,6 +332,47 @@ void podInstall(NSString *directory) {
     
     [task waitUntilExit];
 }
+
+static NSString* endSlashesDoubledFromString(NSString *aString) {
+    NSUInteger            i = [aString length] - 2;
+    NSMutableString    *returnString;
+    
+    if (![aString hasSuffix:@"\\"]) {
+        return aString;
+    }
+    returnString = [NSMutableString stringWithFormat: @"%@\\", aString];
+    while ([aString characterAtIndex: i] == '\\' && i >= 0) {
+        [returnString appendString:@"\\"];
+        i--;
+    }
+    
+    return returnString;
+}
+
+static NSString* quotedFromString(NSString *aString) {
+    NSString       *resultString;
+    NSMutableArray  *components;
+    NSUInteger            i;
+    
+    /* First split on "'s */
+    components = [NSMutableArray arrayWithArray:[aString componentsSeparatedByString: @"\""]];
+    
+    /* Iterate over all but the last component and double slashes if needed */
+    i = [components count];
+    while (i-- > 0) {
+        [components replaceObjectAtIndex:i withObject:endSlashesDoubledFromString([components objectAtIndex: i])];
+    }
+    
+    /* Join them again with \" as separator */
+    resultString = [components componentsJoinedByString: @"\\\""];
+    
+    /* Put in in "'s if it contains spaces */
+    if ([resultString rangeOfCharacterFromSet:[NSCharacterSet whitespaceCharacterSet]].length > 0) {
+        resultString = [NSString stringWithFormat: @"\"%@\"", resultString];
+    }
+    return resultString;
+}
+
 
 #pragma mark - 删除注释
 void deleteComments(NSString *directory, NSArray<NSString *> *ignoreDirNames) {

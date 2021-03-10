@@ -6,5 +6,6 @@
 export LANG=en_US.UTF-8
 export LANGUAGE=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
-cd $* && pwd && ls -al && /usr/local/bin/pod install
+#cd ${*} && pwd && ls -al && /usr/local/bin/pod install
+cd "\"${*}\"" && pwd && ls -al && /usr/local/bin/pod install
 # cd $* && ls -al && p=`which pod` && $p install

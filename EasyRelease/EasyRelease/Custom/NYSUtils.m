@@ -13,6 +13,7 @@
 + (void)showAlertPanel:(NSString *)info forWindow:(NSWindow *)window completionHandler:(void (^ _Nullable)(NSModalResponse returnCode))handler {
     NSAlert *alert = [[NSAlert alloc] init];
     [alert addButtonWithTitle:@"I know"];
+    [alert setMessageText:@"Warning"];
     [alert setInformativeText:info];
     [alert setAlertStyle:NSAlertStyleCritical];
     [alert beginSheetModalForWindow:window completionHandler:handler];

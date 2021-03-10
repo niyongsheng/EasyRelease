@@ -150,7 +150,7 @@
             NYSConfigModel *model = [NYSConfigModel yy_modelWithJSON:str];
             NSDictionary *infoDictionary = [[NSBundle mainBundle] infoDictionary];
             NSString *app_Version = [infoDictionary objectForKey:@"CFBundleShortVersionString"];
-            if ([model.version isEqual:app_Version]) {
+            if (model.version.floatValue >= app_Version.floatValue) {
                 [self handelConfig:model url:url];
             } else {
                 NSAlert *alert = [[NSAlert alloc] init];
@@ -234,6 +234,12 @@
     [fm fileExistsAtPath:NConfig.projectDirUrl.path isDirectory:&isDirectory];
     if (!isDirectory) {
         [NYSUtils showAlertPanel:@"Project directory inexistence" forWindow:self.view.window completionHandler:nil];
+        return;
+    }
+    
+#pragma mark -FIX 检查路径中是否包含空格
+    if ((NConfig.isRehashImages || NConfig.isAutoPodInstall) && ([NConfig.projectFileDirUrl.path.stringByDeletingLastPathComponent rangeOfCharacterFromSet:[NSCharacterSet whitespaceCharacterSet]].length > 0)) {
+        [NYSUtils showAlertPanel:@"The project path contains Spaces. \ndelete spaces \nor \nclose Rehash images \nclose Auto pod install" forWindow:self.view.window completionHandler:nil];
         return;
     }
     
