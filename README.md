@@ -18,7 +18,7 @@ EasyRelease
 - [ ] Code Mix
 
 ## Screenshot
-![image](https://github.com/niyongsheng/niyongsheng.github.io/blob/master/Document/easy_release_demo.gif?raw=true)
+![image](https://github.com/user-attachments/assets/89c8afca-6e6e-49be-8e59-08446f9d593b)
 
 ## Imagemagick
 ```shell
